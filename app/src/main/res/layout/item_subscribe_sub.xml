@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.SimpleRecyclerViewAdapter.SimpleCallback" />
+
+        <variable
+            name="bean"
+            type="com.flytrom.learning.beans.response_beans.payment_beans.PlanMetadataBean" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:orientation="vertical"
+        card_view:cardBackgroundColor="#CDE4FE"
+        card_view:cardCornerRadius="@dimen/_10sdp"
+        card_view:cardElevation="@dimen/_5sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_5sdp">
+
+            <TextView
+                style="@style/CustomTextViewBold"
+                android:fontFamily="@font/calibrib_bold"
+                android:text='@{bean.title+" "+bean.type}'
+                android:textColor="@color/color_gray_side_menu_text"
+                android:textSize="@dimen/_14sdp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/linear_subjects"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_10sdp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility='@{bean.planTypes.videos==1?View.VISIBLE:View.GONE}'>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/image_video"
+                                    android:layout_width="@dimen/_17sdp"
+                                    android:layout_height="@dimen/_14sdp"
+                                    android:src="@drawable/videos_icon"
+                                    tools:ignore="ContentDescription" />
+
+                                <TextView
+                                    style="@style/CustomTextViewBold"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="@string/videos"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/color_gray_side_menu_text"
+                                    android:textSize="@dimen/_10sdp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/CustomTextViewRegular"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="@string/title_chapter_wise_lectures"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                                <TextView
+                                    style="@style/CustomTextViewRegular"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="@string/title_chapter_notes"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                                <TextView
+                                    style="@style/CustomTextViewRegular"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="@string/title_important_screenshots"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                                <TextView
+                                    style="@style/CustomTextViewRegular"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="@string/title_doubt_clearance_via_chat"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility='@{bean.planTypes.questionBank==1?View.VISIBLE:View.GONE}'>
+
+                            <ImageView
+                                android:id="@+id/image_qbank"
+                                android:layout_width="@dimen/_17sdp"
+                                android:layout_height="@dimen/_12sdp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/qbank_icon"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+                                style="@style/CustomTextViewBold"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:text="@string/q_bank"
+                                android:textAllCaps="true"
+                                android:textColor="@color/color_gray_side_menu_text"
+                                android:textSize="@dimen/_10sdp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility='@{bean.planTypes.tests==1?View.VISIBLE:View.GONE}'>
+
+                            <ImageView
+                                android:id="@+id/image_test"
+                                android:layout_width="@dimen/_17sdp"
+                                android:layout_height="@dimen/_12sdp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/tests_icon"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+                                style="@style/CustomTextViewBold"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:text="@string/tests"
+                                android:textAllCaps="true"
+                                android:textColor="@color/color_gray_side_menu_text"
+                                android:textSize="@dimen/_10sdp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:orientation="vertical"
+                            android:padding="@dimen/_5sdp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@drawable/bg_round_white_filled_less"
+                                android:padding="@dimen/_2sdp"
+                                android:text='@{bean.validity+" months Validity"}'
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10sdp"
+                                tools:text="3 months Validity" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/text_amount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text='@{"\u20B9 "+bean.amount}'
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp"
+                                    tools:text="\u20B9 14000" />
+
+                                <TextView
+                                    android:id="@+id/text_old_amount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="16dp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:text='@{bean.oldAmount}'
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8sdp"
+                                    android:visibility='@{bean.oldAmount.equals("0")?View.GONE:View.VISIBLE}'
+                                    card_view:strikeThrough="@{true}"
+                                    tools:text="14000" />
+
+                                <TextView
+                                    android:id="@+id/text_percent"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="16dp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:text='@{bean.percentage+"% off"}'
+                                    android:textColor="@color/color_red"
+                                    android:textSize="@dimen/_8sdp"
+                                    android:visibility='@{bean.oldAmount.equals("0")?View.GONE:View.VISIBLE}'
+                                    tools:text="14000" />
+                            </LinearLayout>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_margin="@dimen/_5sdp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:id="@+id/buythreeMon"
+                                android:onClick="@{(v)->callback.onClick(v,bean)}"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                app:cardBackgroundColor="@color/color_home_gradient_center"
+                                app:cardCornerRadius="@dimen/_8sdp">
+
+                                <TextView
+                                    android:layout_width="@dimen/_80sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    android:gravity="center"
+                                    android:text="Buy Now"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_9sdp"
+                                    android:textStyle="bold" />
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/black"
+                            android:layout_margin="@dimen/_2sdp"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:orientation="vertical"
+                            android:padding="@dimen/_5sdp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@drawable/bg_round_white_filled_less"
+                                android:padding="@dimen/_2sdp"
+                                android:text='@{bean.validity2+" months Validity"}'
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10sdp"
+                                tools:text="6 months Validity" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/text_amount6"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text='@{"\u20B9 "+bean.amount2}'
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp"
+                                    tools:text="\u20B9 14000" />
+
+                                <TextView
+                                    android:id="@+id/text_old_amount6"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="16dp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:text='@{bean.oldAmount2}'
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8sdp"
+                                    android:visibility='@{bean.oldAmount.equals("0")?View.GONE:View.VISIBLE}'
+                                    card_view:strikeThrough="@{true}"
+                                    tools:text="14000" />
+
+                                <TextView
+                                    android:id="@+id/text_percentage2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="16dp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:text='@{bean.percentage2+"% off"}'
+                                    android:textColor="@color/color_red"
+                                    android:textSize="@dimen/_8sdp"
+                                    android:visibility='@{bean.oldAmount.equals("0")?View.GONE:View.VISIBLE}'
+                                    tools:text="14000" />
+                            </LinearLayout>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_margin="@dimen/_5sdp"
+                                android:id="@+id/buy6mon"
+                                android:onClick="@{(v)->callback.onClick(v,bean)}"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                app:cardBackgroundColor="@color/color_home_gradient_center"
+                                app:cardCornerRadius="@dimen/_8sdp">
+
+                                <TextView
+                                    android:layout_width="@dimen/_80sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    android:gravity="center"
+                                    android:text="Buy Now"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_9sdp"
+                                    android:textStyle="bold" />
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_alignParentEnd="true"-->
+                <!--                    android:layout_marginEnd="@dimen/_10sdp"-->
+                <!--                    android:gravity="end"-->
+                <!--                    android:orientation="vertical">-->
+
+
+                <!--                    <TextView-->
+                <!--                        style="@style/CustomTextViewMedium"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:fontFamily="@font/calibrib_bold"-->
+                <!--                        android:gravity="center_vertical"-->
+                <!--                        android:text="@string/buy_now"-->
+                <!--                        android:textColor="@color/blue_text_color" />-->
+
+                <!--                </LinearLayout>-->
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

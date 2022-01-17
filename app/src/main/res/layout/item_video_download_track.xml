@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.SimpleRecyclerViewAdapter.SimpleCallback" />
+
+        <variable
+            name="bean"
+            type="com.flytrom.learning.beans.normal_beans.DownloadVideoTrackBean" />
+
+        <variable
+            name="pos"
+            type="Integer" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{(v)->callback.onClickWithPosition(v,bean,pos)}"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_5sdp">
+
+        <RadioButton
+            android:id="@+id/image_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:buttonTint="@color/blue_text_color"
+            android:focusable="false"
+            android:clickable="false"
+            android:enabled="false"
+            android:checked="@{bean.selected?true:false}"
+            tools:targetApi="lollipop" />
+
+        <TextView
+            style="@style/CustomTextViewMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_toStartOf="@+id/image_radio_button"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@{bean.name}"
+            android:textColor="@color/gray_dark" />
+
+    </RelativeLayout>
+
+</layout>

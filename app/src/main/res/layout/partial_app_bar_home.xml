@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.BaseCallback" />
+
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/rl_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        tools:context=".activities.others.HomeActivity">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/partial_toolbar"
+            app:callback="@{callback}" />
+
+        <FrameLayout
+            android:id="@+id/frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottom_menus"
+            android:layout_below="@+id/toolbar" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_above="@+id/bottom_menus"
+            android:background="@color/gray_dark"
+            android:visibility="gone" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_menus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:padding="@dimen/_5sdp"
+            app:itemBackground="@drawable/bottomitemselect"
+            app:itemIconTint="@color/bottom_menu_selector"
+            app:itemTextAppearanceActive="@style/TabTextRegular"
+            app:itemTextAppearanceInactive="@style/TabTextRegular"
+            app:itemTextColor="@color/bottom_menu_selector"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/home_menu" />
+
+    </RelativeLayout>
+
+</layout>

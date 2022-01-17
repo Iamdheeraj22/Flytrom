@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="bean"
+            type="com.flytrom.learning.beans.response_beans.others.SolveMCQBean" />
+
+    </data>
+
+    <View
+        android:layout_width="@dimen/_6sdp"
+        android:layout_height="@dimen/_6sdp"
+        android:layout_margin="@dimen/_2sdp"
+        app:pinPoint="@{bean}" />
+
+</layout>

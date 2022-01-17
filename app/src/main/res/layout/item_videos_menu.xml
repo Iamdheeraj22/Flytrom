@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.SimpleRecyclerViewAdapter.SimpleCallback" />
+
+        <variable
+            name="bean"
+            type="com.flytrom.learning.beans.response_beans.subject.SubjectBean" />
+
+        <variable
+            name="pos"
+            type="Integer" />
+
+        <import type="com.flytrom.learning.utils.Constants" />
+
+        <import type="android.view.View" />
+
+        <import type="com.flytrom.learning.utils.UtilMethods" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:onClick="@{(v)->callback.onClick(v,bean)}"
+        card_view:cardCornerRadius="@dimen/_10sdp"
+        card_view:cardElevation="@dimen/_5sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/relative_pro"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_round_exitra_light_gray_filled"
+                android:gravity="center"
+                android:padding="@dimen/_1sdp"
+                android:visibility="@{UtilMethods.getProLockVisibility(bean,pos,1)}">
+
+                <ImageView
+                    android:id="@+id/image_lock"
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_lock_test"
+                    android:tint="@color/gray_dark"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/CustomTextViewRegular"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_toEndOf="@+id/image_lock"
+                    android:text="@string/pro"
+                    android:textColor="@color/gray_dark"
+                    android:textSize="@dimen/_6sdp" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                card_view:placeholder="@{pos==0?@drawable/ic_saved_videos:pos==1?@drawable/image_free_videos:@drawable/ic_circle_placeholder}"
+                card_view:round_pic="@{Constants.MEDIA_URL + bean.icon}"
+                tools:ignore="ContentDescription" />
+
+            <!--
+                android:background="@drawable/bg_circle_gray_image_back"-->
+
+            <TextView
+                style="@style/CustomTextViewMedium"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/calibrib_bold"
+                android:gravity="center"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:text="@{bean.title}"
+                android:textColor="@color/gray_dark" />
+
+            <!--android:textSize="@{pos==0|1?@dimen/_14sdp:@dimen/_12sdp}-->
+
+            <TextView
+                style="@style/CustomTextViewRegular"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:singleLine="true"
+                android:text='@{bean.totalVideoCompleted+"/"+bean.totalVideos+" videos watched"}'
+                android:textColor="@color/blue_text_color"
+                android:textSize="@dimen/_10sdp"
+                android:visibility="@{pos==0||pos==1?View.INVISIBLE:View.VISIBLE}" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

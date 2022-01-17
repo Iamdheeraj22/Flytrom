@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_bottom_sheet">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_3sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@color/gray_dark" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp">
+
+                <ImageView
+                    android:id="@+id/image_profile"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_process"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/text_plan_name"
+                    style="@style/CustomTextViewMedium"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@+id/image_profile"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="@color/blue_text_color"
+                    tools:text="Name Here" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/text_rs_one"
+                            style="@style/CustomTextViewRegular"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_3sdp"
+                            android:text="Rs."
+                            android:textSize="@dimen/_10sdp" />
+
+                        <TextView
+                            android:id="@+id/text_amount"
+                            style="@style/CustomTextViewRegular"
+                            android:layout_marginEnd="@dimen/_3sdp"
+                            android:layout_toEndOf="@+id/text_rs_one"
+                            android:text="1400"
+                            android:textSize="@dimen/_10sdp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/relative_old_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/text_rs_old"
+                            style="@style/CustomTextViewRegular"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_3sdp"
+                            android:text="Rs."
+                            android:textSize="@dimen/_10sdp" />
+
+                        <TextView
+                            android:id="@+id/text_old_amount"
+                            style="@style/CustomTextViewRegular"
+                            android:layout_marginEnd="@dimen/_3sdp"
+                            android:layout_toEndOf="@+id/text_rs_old"
+                            android:text="1400"
+                            android:textSize="@dimen/_10sdp" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/text_percent"
+                        style="@style/CustomTextViewRegular"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_3sdp"
+                        android:text="0%"
+                        android:textSize="@dimen/_10sdp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <!--
+                                <TextView
+                                    android:id="@+id/text_plan_price"
+                                    style="@style/CustomTextViewMedium"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:ellipsize="end"
+                                    android:singleLine="true"
+                                    android:textColor="@color/black"
+                                    tools:text="Price" />
+                -->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_below="@+id/image_profile"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/white" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@color/gray_dark" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/relative_coupon_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/text_cc_static"
+                        style="@style/CustomTextViewMedium"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_3sdp"
+                        android:text="@string/title_coupon_discount"
+                        android:textColor="@color/gray_dark" />
+
+                    <RelativeLayout
+                        android:id="@+id/relative_coupon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/text_cc_static">
+
+                        <TextView
+                            android:id="@+id/text_cc"
+                            style="@style/CustomTextViewMedium"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:background="@color/blue_text_color"
+                            android:padding="@dimen/_4sdp"
+                            android:text="@string/title_coupon_code"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/text_applied"
+                            style="@style/CustomTextViewMedium"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/text_cc"
+                            android:text="@string/text_applied"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/text_payment_mode"
+                    style="@style/CustomTextViewRegular"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    tools:text="Payment mode" />
+
+                <TextView
+                    android:id="@+id/text_reference_id"
+                    style="@style/CustomTextViewRegular"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    tools:text="Reference Id" />
+
+                <TextView
+                    android:id="@+id/text_status"
+                    style="@style/CustomTextViewRegular"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    tools:text="Status" />
+
+                <TextView
+                    android:id="@+id/text_date"
+                    style="@style/CustomTextViewRegular"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    tools:text="Date" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_close"
+                style="@style/CustomButton"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/bg_button_primary_blue"
+                android:text="@string/text_close" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

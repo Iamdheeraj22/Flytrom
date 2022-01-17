@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.BaseCallback"/>
+
+    </data>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
+       <RelativeLayout
+           android:id="@+id/relative_toolbar"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+           <include
+               android:id="@+id/toolbar"
+               layout="@layout/partial_toolbar_back"
+               app:callback="@{callback}" />
+
+       </RelativeLayout>
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+           <fragment
+               android:id="@+id/vdo_player_fragment_live"
+               android:name="com.vdocipher.aegis.player.VdoPlayerSupportFragment"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:keepScreenOn="true" />
+           <com.flytrom.learning.custom_views.player.VdoPlayerControlView
+               android:id="@+id/player_control_view_live"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_alignStart="@id/vdo_player_fragment_live"
+               android:layout_alignTop="@id/vdo_player_fragment_live"
+               android:layout_alignEnd="@id/vdo_player_fragment_live"
+               android:layout_alignBottom="@id/vdo_player_fragment_live" />
+
+           <RelativeLayout
+               android:id="@+id/rl_poster_live"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+               <androidx.appcompat.widget.AppCompatImageView
+                   android:id="@+id/image_poster_live"
+                   android:layout_width="match_parent"
+                   android:layout_height="@dimen/_180sdp"
+                   android:scaleType="centerCrop"
+                   android:src="@drawable/image_test_ques_p_holder" />
+
+               <androidx.appcompat.widget.AppCompatImageView
+                   android:id="@+id/image_play_live"
+                   android:layout_width="@dimen/_40sdp"
+                   android:layout_height="@dimen/_40sdp"
+                   android:layout_centerInParent="true"
+                   android:onClick="@{(v)->callback.onClick(v)}"
+                   android:src="@drawable/ic_video_play" />
+
+           </RelativeLayout>
+
+       </RelativeLayout>
+   </LinearLayout>
+
+</layout>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.SimpleRecyclerViewAdapter.SimpleCallback" />
+
+        <variable
+            name="bean"
+            type="com.flytrom.learning.beans.response_beans.test_bean.TestBean" />
+
+        <variable
+            name="pos"
+            type="Integer" />
+
+        <import type="android.view.View" />
+
+        <import type="com.flytrom.learning.utils.Constants" />
+
+        <import type="com.flytrom.learning.utils.UtilMethods" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_110sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:clickable="true"
+        android:id="@+id/relative_test"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:onClick="@{(v)->callback.onClickWithPosition(v,bean,pos)}"
+        card_view:cardCornerRadius="@dimen/_10sdp"
+        card_view:cardElevation="@dimen/_5sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_90sdp"
+                card_view:cardCornerRadius="@dimen/_10sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:id="@+id/vCardImg"
+                android:visibility='@{bean.isCompleted.equalsIgnoreCase("1")?View.VISIBLE:View.GONE}'
+                card_view:cardBackgroundColor="@color/blue">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/rlNotificationCount"
+                    android:layout_width="@dimen/_13sdp"
+                    android:layout_height="@dimen/_13sdp"
+                    android:layout_alignParentEnd="true"
+                    android:elevation="@dimen/_5sdp"
+                    card_view:cardCornerRadius="@dimen/_7sdp"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/tvCount"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@{String.valueOf(pos+1)}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_9sdp" />
+                </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    app:placeholder="@{@drawable/ic_circle_placeholder}"
+                    app:round_pic="@{Constants.MEDIA_URL + bean.icon}"
+                    android:layout_gravity="center"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="bottom"
+                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/_5sdp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Complete"
+                        android:gravity="center_horizontal"
+                        android:id="@+id/progressTestsTxt2"
+                        android:textSize="10sp"
+                        android:textColor="@color/white" />
+                    <ProgressBar
+                        android:id="@+id/progressTest2"
+                        android:layout_width="80dp"
+                        android:layout_height="6dp"
+                        android:progress="100"
+                        android:max="100"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:progressDrawable="@drawable/bg_round_white_filled_less"
+                        android:layout_marginTop="@dimen/_2sdp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/vCardImgW"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:visibility='@{bean.isCompleted.equalsIgnoreCase("0")?View.VISIBLE:View.GONE}'
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                card_view:cardBackgroundColor="@color/white"
+                card_view:cardCornerRadius="@dimen/_10sdp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/rlNotificationCountW"
+                    android:layout_width="@dimen/_13sdp"
+                    android:layout_height="@dimen/_13sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:elevation="@dimen/_5sdp"
+                    android:visibility="visible"
+                    card_view:cardCornerRadius="@dimen/_7sdp">
+
+                    <TextView
+                        android:id="@+id/tvCountW"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@{String.valueOf(pos+1)}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_9sdp" />
+                </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_gravity="center"
+                    app:placeholder="@{@drawable/ic_circle_placeholder}"
+                    app:round_pic="@{Constants.MEDIA_URL + bean.icon}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/progressTestsTxtW2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text='@{"Progress "+bean.progress+"%"}'
+                        android:textColor="@color/gray"
+                        android:textSize="10sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progressTestW2"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="80dp"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:max="100"
+                        android:progress='@{Integer.parseInt(bean.progress)}'
+                        android:progressDrawable="@drawable/custom_progress" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_toRightOf="@id/vCardImg">
+
+                <TextView
+                    android:id="@+id/catName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_toLeftOf="@id/cardNext"
+                    android:text="@{bean.title_category}"
+                    android:visibility='@{bean.isCompleted.equalsIgnoreCase("1")?View.VISIBLE:View.GONE}'
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp" />
+
+                <TextView
+                    android:id="@+id/catName1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_100sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_toLeftOf="@id/cardNext"
+                    android:text="@{bean.title_category}"
+                    android:visibility='@{bean.isCompleted.equalsIgnoreCase("0")?View.VISIBLE:View.GONE}'
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    />
+
+                <TextView
+                    android:id="@+id/subjectName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/catName"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_toLeftOf="@id/cardNext"
+                    android:text="@{bean.testName}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13sdp"
+                    android:textStyle="bold"
+                    android:visibility='@{bean.isCompleted.equalsIgnoreCase("1")?View.VISIBLE:View.GONE}' />
+
+                <TextView
+                    android:id="@+id/subjectName1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/catName1"
+                    android:layout_marginLeft="@dimen/_100sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_toLeftOf="@id/cardNext"
+                    android:text="@{bean.testName}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13sdp"
+                    android:textStyle="bold"
+                    android:visibility='@{bean.isCompleted.equalsIgnoreCase("0")?View.VISIBLE:View.GONE}' />
+
+                <TextView
+                    android:id="@+id/chapterName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/_100sdp"
+                    android:layout_marginBottom="15dp"
+                    android:visibility='@{bean.isCompleted.equalsIgnoreCase("0")?View.VISIBLE:View.GONE}'
+                    android:text='@{bean.totalQuestions.equals("0")?bean.totalQuestions+" Question":bean.totalQuestions+" Questions"}'
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp" />
+
+                <TextView
+                    android:id="@+id/chapterName1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginBottom="15dp"
+                    android:visibility='@{bean.isCompleted.equalsIgnoreCase("1")?View.VISIBLE:View.GONE}'
+                    android:text='@{bean.totalQuestions.equals("0")?bean.totalQuestions+" Question":bean.totalQuestions+" Questions"}'
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardNext"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_17sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:elevation="@dimen/_5sdp"
+                    android:visibility="visible"
+                    card_view:cardBackgroundColor="#E7EBEB"
+                    card_view:cardCornerRadius="@dimen/_15sdp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_play_arrow_white_24dp"
+                        app:tint="#9D77E1" />
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/btn_download"
+                    style="@style/CustomButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background='@{bean.is_downloaded.equals("Yes")?@drawable/bg_button_primary_green:@drawable/bg_button_primary_blue}'
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:minWidth="@dimen/_60sdp"
+                    android:onClick="@{(v)->callback.onClickWithPosition(v,bean,pos)}"
+                    android:padding="@dimen/_2sdp"
+                    android:text='@{bean.is_downloaded.equals("Yes")?@string/downloaded:@string/download}'
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_6sdp" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relative_pro"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/bg_round_exitra_light_gray_filled"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/_50sdp"
+            android:padding="@dimen/_1sdp"
+            android:visibility="@{UtilMethods.getSubItemsProLockVisibility(bean.type)}">
+
+            <ImageView
+                android:id="@+id/image_lock"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_lock_test"
+                app:tint="@color/gray_dark"
+                tools:ignore="ContentDescription,TooDeepLayout" />
+
+            <TextView
+                style="@style/CustomTextViewRegular"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_toEndOf="@+id/image_lock"
+                android:text="@string/pro"
+                android:textColor="@color/gray_dark"
+                android:textSize="@dimen/_6sdp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

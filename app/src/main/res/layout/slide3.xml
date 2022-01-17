@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:src="@drawable/slide3"
+        android:layout_marginTop="@dimen/_10sdp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Video Lectures, Notes and Questions"
+        android:textSize="@dimen/_18sdp"
+        android:textColor="@color/blue"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:gravity="center_horizontal"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="are created by Experienced Pilots"
+        android:textSize="@dimen/_18sdp"
+        android:textColor="@color/blue"
+        android:gravity="center_horizontal"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thousands of Questions across"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:gravity="center_horizontal"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="all aviation subjects"
+        android:textSize="@dimen/_12sdp"
+        android:gravity="center_horizontal"/>
+
+</LinearLayout>

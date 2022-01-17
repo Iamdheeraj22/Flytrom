@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:src="@drawable/slide2"
+        android:padding="@dimen/_20sdp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Multiple Choice Questions are"
+        android:textSize="@dimen/_18sdp"
+        android:textColor="@color/blue"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:gravity="center_horizontal"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="given with Clear Explanation"
+        android:textSize="@dimen/_18sdp"
+        android:textColor="@color/blue"
+        android:gravity="center_horizontal"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Solve them at your own pace"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:gravity="center_horizontal"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="And Track your Progress"
+        android:textSize="@dimen/_12sdp"
+        android:gravity="center_horizontal"/>
+
+
+</LinearLayout>

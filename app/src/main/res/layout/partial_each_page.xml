@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.flytrom.learning.pdf_viewer.PDFZoomImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:contentDescription="@null"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/text_counter"
+        style="@style/CustomTextViewRegular"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/bg_round_light_gray_filled_less"
+        android:paddingStart="@dimen/_4sdp"
+        android:paddingTop="@dimen/_1sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:paddingBottom="@dimen/_1sdp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10sdp" />
+
+</RelativeLayout>

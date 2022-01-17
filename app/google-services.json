@@ -1,0 +1,71 @@
+{
+  "project_info": {
+    "project_number": "552467206853",
+    "firebase_url": "https://flytromlearning.firebaseio.com",
+    "project_id": "flytromlearning",
+    "storage_bucket": "flytromlearning.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552467206853:android:910b3ec04b05a83f3156ac",
+        "android_client_info": {
+          "package_name": "com.flytrom.learning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "552467206853-8ooh54635j9efeg4ftgtgf476ifmtrk2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flytrom.learning",
+            "certificate_hash": "27e488b87da43021fbb510523f9c0a70e6a478f1"
+          }
+        },
+        {
+          "client_id": "552467206853-cut933ig2f8pnralv7i72g4s9bun3bvj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flytrom.learning",
+            "certificate_hash": "e3bfb6e6d2384705f78f051fcf4c1c7e6464875a"
+          }
+        },
+        {
+          "client_id": "552467206853-ifrjd30nha6cnss4vgsfm6vng1mmnn37.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flytrom.learning",
+            "certificate_hash": "3a385d91922889c3feceff92f3d304124f627241"
+          }
+        },
+        {
+          "client_id": "552467206853-9nlcdig4cgsvi7v2hor756hrvncs37l4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDku5Lzh7MPyMhbglsCjwoIjij_EH-g13Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "552467206853-9nlcdig4cgsvi7v2hor756hrvncs37l4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "552467206853-r5653kdbpt1r215k8nu8rajmkdagpo4p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.smartparadise.dev"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

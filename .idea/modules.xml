@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Flytrom.iml" filepath="$PROJECT_DIR$/.idea/modules/Flytrom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Flytrom.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Flytrom.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/Flytrom.library.iml" filepath="$PROJECT_DIR$/.idea/modules/library/Flytrom.library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/permissions/Flytrom.permissions.iml" filepath="$PROJECT_DIR$/.idea/modules/permissions/Flytrom.permissions.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.SimpleRecyclerViewAdapter.SimpleCallback" />
+
+        <variable
+            name="bean"
+            type="com.flytrom.learning.beans.response_beans.subject.SubjectBean" />
+
+        <variable
+            name="pos"
+            type="Integer" />
+
+        <import type="com.flytrom.learning.utils.Constants" />
+
+        <import type="android.view.View" />
+
+        <import type="com.flytrom.learning.utils.UtilMethods" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/bg_round_left_side"
+        android:elevation="@dimen/_5sdp"
+        android:orientation="vertical"
+        tools:targetApi="lollipop">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{(v)->callback.onClick(v,bean)}"
+            android:padding="@dimen/_10sdp">
+
+            <ImageView
+                android:id="@+id/image_lecturer"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_centerVertical="true"
+                app:placeholder="@{pos==0?@drawable/image_free_videos:@drawable/ic_circle_placeholder}"
+                app:round_pic="@{Constants.MEDIA_URL + bean.icon}"
+                tools:ignore="ContentDescription" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_toEndOf="@+id/image_lecturer"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        style="@style/CustomTextViewRegular"
+                        android:layout_width="match_parent"
+                        android:layout_toStartOf="@+id/relative_pro"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/calibrib_bold"
+                        android:gravity="start"
+                        android:singleLine="true"
+                        android:text="@{bean.title}"
+                        android:textColor="@color/gray_dark"
+                        android:textSize="@dimen/_14sdp" />
+
+                    <RelativeLayout
+                        android:id="@+id/relative_pro"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/bg_round_exitra_light_gray_filled"
+                        android:gravity="center"
+                        android:padding="@dimen/_1sdp"
+                        android:visibility="@{UtilMethods.getProLockVisibility(bean,pos,2)}">
+
+                        <ImageView
+                            android:id="@+id/image_lock"
+                            android:layout_width="@dimen/_10sdp"
+                            android:layout_height="@dimen/_10sdp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_lock_test"
+                            android:tint="@color/gray_dark"
+                            tools:ignore="ContentDescription" />
+
+                        <TextView
+                            style="@style/CustomTextViewRegular"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_2sdp"
+                            android:layout_toEndOf="@+id/image_lock"
+                            android:text="@string/pro"
+                            android:textColor="@color/gray_dark"
+                            android:textSize="@dimen/_6sdp" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+                <TextView
+                    style="@style/CustomTextViewRegular"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text='@{bean.totalChapterCompleted+"/"+bean.totalChapters+" chapters completed"}'
+                    android:textColor="@color/blue_text_color"
+                    android:textSize="@dimen/_8sdp"
+                    android:visibility="@{pos==0?View.INVISIBLE:View.VISIBLE}" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/black" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

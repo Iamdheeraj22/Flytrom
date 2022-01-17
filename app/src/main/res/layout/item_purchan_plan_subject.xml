@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="subject"
+            type="String" />
+
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_4sdp">
+
+        <ImageView
+            android:id="@+id/image_check_mark"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:src="@drawable/image_check_mark"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/text_subjects"
+            style="@style/CustomTextViewMedium"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_toEndOf="@+id/image_check_mark"
+            android:text="@{subject}"
+            android:textColor="@color/gray_dark" />
+
+    </RelativeLayout>
+
+</layout>

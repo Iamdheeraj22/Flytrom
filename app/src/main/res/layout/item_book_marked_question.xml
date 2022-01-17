@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.SimpleRecyclerViewAdapter.SimpleCallback" />
+
+        <variable
+            name="bean"
+            type="com.flytrom.learning.beans.response_beans.test_bean.QuestionBean" />
+
+        <variable
+            name="pos"
+            type="Integer" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_1sdp"
+            app:cardElevation="@dimen/_3sdp">
+
+            <RelativeLayout
+                android:id="@+id/relative_entire_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{(v)->callback.onClick(v,bean)}"
+                android:padding="@dimen/_10sdp">
+
+                <TextView
+                    android:id="@+id/text_question"
+                    style="@style/CustomTextViewRegular"
+                    android:layout_width="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@+id/image_bookmark"
+                    android:maxLines="3"
+                    android:text="@{bean.question}" />
+
+                <!--
+                    android:text='@{(pos+1)+". "+bean.question}'-->
+
+                <ImageView
+                    android:id="@+id/image_bookmark"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_alignParentEnd="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{(v)->callback.onClick(v,bean)}"
+                    android:padding="@dimen/_5sdp"
+                    android:src="@{bean.selected?@drawable/ic_bookmark_blue:@drawable/ic_bookmark_white}"
+                    android:tint="@{bean.selected?@color/blue_text_color:@color/gray_dark}"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/CustomTextViewRegular"
+                    android:layout_below="@+id/text_question"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="@{bean.questionCategory}"
+                    android:textColor="@color/blue_text_color"
+                    android:textSize="@dimen/_10sdp" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+</layout>

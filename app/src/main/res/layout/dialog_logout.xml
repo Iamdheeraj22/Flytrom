@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.BaseCustomDialog.DialogListener" />
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/_15sdp"
+        android:background="@drawable/bg_round_white_filled">
+
+        <TextView
+            style="@style/CustomTextViewRegular"
+            android:text="@string/text_hey_are_you_sure_you_want_to_logout"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:padding="@dimen/_8sdp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:background="@color/gray_dark" />
+
+        <TextView
+            android:id="@+id/text_logout"
+            android:onClick="@{(v)->callback.onViewClick(v)}"
+            style="@style/CustomTextViewRegular"
+            android:layout_width="@dimen/_80sdp"
+            android:gravity="center"
+            android:text="@string/text_logout"
+            android:textSize="@dimen/_14sdp"
+            android:padding="@dimen/_3sdp"
+            android:background="?attr/selectableItemBackground"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+</layout>

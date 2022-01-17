@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.SimpleRecyclerViewAdapter.SimpleCallback" />
+
+        <variable
+            name="bean"
+            type="com.flytrom.learning.beans.normal_beans.NoteBean" />
+
+        <variable
+            name="pos"
+            type="Integer" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_simple"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:contentDescription="@null"
+            android:onClick="@{(v)->callback.onClickWithPosition(v,bean,pos)}"
+            android:scaleType="fitCenter"/>
+
+
+<!--
+        <com.flytrom.learning.pdf_viewer.PDFZoomImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:contentDescription="@null"
+            android:onClick="@{(v)->callback.onClickWithPosition(v,bean,pos)}"
+            android:scaleType="fitCenter"
+            app:setBitmap="@{bean.bitmap}" />
+-->
+
+        <TextView
+            android:id="@+id/text_counter"
+            style="@style/CustomTextViewRegular"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/bg_round_light_gray_filled_less"
+            android:paddingStart="@dimen/_4sdp"
+            android:paddingTop="@dimen/_1sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:paddingBottom="@dimen/_1sdp"
+            android:text="@{String.valueOf(pos+1)}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp" />
+
+    </RelativeLayout>
+
+</layout>

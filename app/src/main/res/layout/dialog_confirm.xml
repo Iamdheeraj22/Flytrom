@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.BaseCustomDialog.DialogListener" />
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_round_white_filled"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/_15sdp">
+
+
+        <ImageView
+            android:id="@+id/image_icon"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            app:srcCompat="@drawable/ic_trash_can"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            style="@style/CustomTextViewRegular"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/text_are_you_sure"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/text_message"
+            style="@style/CustomTextViewRegular"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center"
+            android:hint="@string/text_you_will_not_be"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10sdp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@color/gray_dark"
+            android:paddingTop="@dimen/_10sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/text_cancel"
+                style="@style/CustomTextViewRegular"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:onClick="@{(v)->callback.onViewClick(v)}"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/text_cancel"
+                android:textColor="@color/black" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray_dark" />
+
+            <TextView
+                android:id="@+id/text_yes"
+                style="@style/CustomTextViewRegular"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:onClick="@{(v)->callback.onViewClick(v)}"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/text_delete"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

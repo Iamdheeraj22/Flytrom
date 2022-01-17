@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.BaseCallback" />
+        <variable
+            name="bean"
+            type="com.flytrom.learning.beans.response_beans.payment_beans.PlanDataBean" />
+
+        <variable
+            name="pos"
+            type="Integer" />
+
+        <import type="com.flytrom.learning.utils.Constants" />
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:clickable="true"
+        android:focusable="true"
+        android:id="@+id/cardShoe"
+        android:orientation="vertical"
+        card_view:cardCornerRadius="@dimen/_10sdp"
+        card_view:cardElevation="@dimen/_5sdp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_5sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <androidx.cardview.widget.CardView
+                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    card_view:cardElevation="@dimen/_5sdp"
+                    card_view:cardCornerRadius="@dimen/_8sdp"
+                    card_view:cardBackgroundColor="@color/white">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/img"
+                        app:placeholder="@{bean.image==null?@drawable/image_free_videos:@drawable/ic_circle_placeholder}"
+                        app:set_pic="@{Constants.MEDIA_URL + bean.image}"
+                        android:layout_gravity="center"/>
+                </androidx.cardview.widget.CardView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/faqAns"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        app:cardBackgroundColor="#DADADA">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/show"
+                            android:src="@drawable/ic_baseline_add"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/show2"
+                            android:src="@drawable/ic_minus"/>
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_65sdp"
+                        android:orientation="vertical"
+                        android:layout_marginTop="@dimen/_7sdp">
+
+                        <TextView
+                            android:id="@+id/text_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:fontFamily="@font/calibrib_bold"
+                            android:textStyle="bold"
+                            android:layout_marginRight="@dimen/_50sdp"
+                            android:text='@{bean.planType==null?bean.planName:bean.planName+" "+bean.planType}'
+                            android:textColor="@color/black_pure"
+                            android:textSize="@dimen/_14sdp" />
+                        <TextView
+                            android:id="@+id/text_name_item"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_50sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:textAlignment="viewStart"
+                            android:fontFamily="@font/calibrib_bold"
+                            android:textColor="@color/color_play_video_option"
+                            android:textSize="@dimen/_10sdp"
+                            android:text='@{bean.tagline}'/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:gravity="bottom">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/_10sdp"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                card_view:cardBackgroundColor="@color/white"
+                                card_view:cardCornerRadius="@dimen/_5sdp"
+                                card_view:cardElevation="@dimen/_3sdp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/_10sdp"
+                                    android:layout_marginRight="@dimen/_10sdp"
+                                    android:text='@{bean.number_of_subjects+" Subjects"}'
+                                    android:textColor="@color/color_gray_side_menu_text"
+                                    android:textSize="@dimen/_10sdp" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/_20sdp"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                card_view:cardBackgroundColor="@color/white"
+                                card_view:cardCornerRadius="@dimen/_5sdp"
+                                card_view:cardElevation="@dimen/_3sdp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/_10sdp"
+                                    android:layout_marginRight="@dimen/_10sdp"
+                                    android:text='@{String.valueOf(bean.planMetadata.size())+" Plans"}'
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_10sdp" />
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_10sdp"
+                        android:visibility='@{bean.hasMeta.equals("0")?View.VISIBLE:View.GONE}'>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility='@{bean.planTypes.videos==1?View.VISIBLE:View.GONE}'>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/image_video"
+                                    android:layout_width="@dimen/_12sdp"
+                                    android:layout_height="@dimen/_12sdp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/image_check_mark"
+                                    tools:ignore="ContentDescription" />
+
+                                <TextView
+                                    style="@style/CustomTextViewBold"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="@string/title_video_lectures"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/gray_dark"
+                                    android:textSize="@dimen/_10sdp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/CustomTextViewRegular"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="@string/title_chapter_wise_lectures"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                                <TextView
+                                    style="@style/CustomTextViewRegular"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="@string/title_chapter_notes"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                                <TextView
+                                    style="@style/CustomTextViewRegular"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="@string/title_important_screenshots"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                                <TextView
+                                    style="@style/CustomTextViewRegular"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="@string/title_doubt_clearance_via_chat"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:orientation="horizontal"
+                            android:visibility='@{bean.planTypes.questionBank==1?View.VISIBLE:View.GONE}'>
+
+                            <ImageView
+                                android:id="@+id/image_qbank"
+                                android:layout_width="@dimen/_12sdp"
+                                android:layout_height="@dimen/_12sdp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/image_check_mark"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+                                style="@style/CustomTextViewBold"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:text="@string/q_bank"
+                                android:textAllCaps="true"
+                                android:textColor="@color/gray_dark"
+                                android:textSize="@dimen/_10sdp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:orientation="horizontal"
+                            android:visibility='@{bean.planTypes.tests==1?View.VISIBLE:View.GONE}'>
+
+                            <ImageView
+                                android:id="@+id/image_test"
+                                android:layout_width="@dimen/_12sdp"
+                                android:layout_height="@dimen/_12sdp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/image_check_mark"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+                                style="@style/CustomTextViewBold"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:text="@string/tests"
+                                android:textAllCaps="true"
+                                android:textColor="@color/gray_dark"
+                                android:textSize="@dimen/_10sdp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:gravity="end"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility='@{bean.hasMeta.equals("0")?View.VISIBLE:View.GONE}'>
+
+                        <TextView
+                            android:id="@+id/text_amount"
+                            style="@style/CustomTextViewBold"
+                            android:text='@{"Rs. "+bean.amount}'
+                            tools:text="Rs. 14000" />
+
+                        <TextView
+                            android:id="@+id/text_old_amount"
+                            style="@style/CustomTextViewMedium"
+                            android:text='@{"Rs. "+bean.oldAmount}'
+                            android:textColor="@color/color_gray_side_menu_text"
+                            android:visibility='@{bean.oldAmount.equals("0")?View.GONE:View.VISIBLE}'
+                            card_view:strikeThrough="@{true}"
+                            tools:text="Rs. 14000" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/CustomTextViewMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/calibrib_bold"
+                        android:gravity="center_vertical"
+                        android:text='@{bean.hasMeta.equals("0")?@string/buy_now:@string/see_plans}'
+                        android:textColor="@color/blue_text_color" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_sub_plans"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                android:visibility="gone"
+                tools:targetApi="lollipop" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.BaseCallback" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/CustomTextViewMedium"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:onClick="@{(v)->callback.onClick(v)}"
+            android:text="@string/select_subject"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/_14sdp" />
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_choose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/blue_text_color"
+                android:checked="true"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_30sdp"
+                android:text="@string/choose_subjects"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_14sdp"
+                tools:targetApi="lollipop" />
+
+            <RadioButton
+                android:id="@+id/rb_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/blue_text_color"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:text="@string/all"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_14sdp"
+                tools:targetApi="lollipop" />
+
+        </RadioGroup>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@color/white"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardElevation="@dimen/_5sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_subjects"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
+                    tools:targetApi="lollipop" />
+
+                <include
+                    android:id="@+id/linear_empty_view"
+                    layout="@layout/partial_empty_view"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</layout>

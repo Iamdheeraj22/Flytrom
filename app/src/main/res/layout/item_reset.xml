@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.SimpleRecyclerViewAdapter.SimpleCallback" />
+
+        <variable
+            name="bean"
+            type="com.flytrom.learning.beans.normal_beans.ResetBean" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{(v)->callback.onClick(v,bean)}">
+
+        <LinearLayout
+            android:id="@+id/linear_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_5sdp">
+
+            <TextView
+                style="@style/CustomTextViewBold"
+                android:text="@{bean.headline}"
+                android:textColor="@color/gray_dark" />
+
+            <TextView
+                style="@style/CustomTextViewRegular"
+                android:text="@{bean.description}"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_10sdp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.6dp"
+            android:layout_below="@+id/linear_details"
+            android:background="@color/gray_light" />
+
+    </RelativeLayout>
+
+
+</layout>

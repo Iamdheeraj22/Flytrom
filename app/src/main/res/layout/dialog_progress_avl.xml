@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent">
+
+            <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avl"
+            style="@style/AVLoadingIndicatorView"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_centerInParent="true"
+            app:indicatorColor="@color/blue_text_color"
+            app:indicatorName="BallRotateIndicator" />
+
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.SimpleRecyclerViewAdapter.SimpleCallback" />
+
+        <variable
+            name="bean"
+            type="com.flytrom.learning.beans.response_beans.videos.VideoBean" />
+
+        <import type="com.flytrom.learning.utils.Constants"/>
+
+        <variable
+            name="pos"
+            type="Integer" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/bg_round_right_side"
+        android:elevation="@dimen/_5sdp"
+        tools:targetApi="lollipop">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{(v)->callback.onClickWithPosition(v,bean,pos)}"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp">
+
+            <ImageView
+                android:id="@+id/image_lecturer"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                app:placeholder="@{@drawable/ic_circle_placeholder}"
+                app:round_pic="@{Constants.MEDIA_URL + bean.icon}"
+                tools:ignore="ContentDescription" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_toStartOf="@+id/image_play"
+                android:layout_toEndOf="@+id/image_lecturer"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/CustomTextViewRegular"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@{bean.title}"
+                    android:textColor="@color/gray_dark" />
+
+                <TextView
+                    style="@style/CustomTextViewRegular"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@{bean.category}"
+                    android:textColor="@color/blue_text_color"
+                    android:textSize="@dimen/_8sdp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/black" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/image_play"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:onClick="@{(v)->callback.onClickWithPosition(v,bean,pos)}"
+                android:padding="@dimen/_3sdp"
+                android:src="@drawable/ic_video_play"
+                tools:ignore="ContentDescription" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.BaseCallback" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/partial_toolbar_back"
+            app:callback="@{callback}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_10sdp"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:visibility="gone"
+                android:background="@drawable/bg_round_white_filled_less"
+                android:elevation="@dimen/_1sdp"
+                tools:targetApi="lollipop">
+
+                <TextView
+                    android:id="@+id/text_change_pass"
+                    style="@style/CustomTextViewMedium"
+                    android:layout_width="match_parent"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{(v)->callback.onClick(v)}"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/change_password" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:background="@drawable/bg_round_white_filled_less"
+                android:elevation="@dimen/_1sdp"
+                tools:targetApi="lollipop">
+
+                <TextView
+                    android:id="@+id/region"
+                    style="@style/CustomTextViewMedium"
+                    android:layout_width="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{(v)->callback.onClick(v)}"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Region" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_60sdp"
+                    android:id="@+id/regionChangeCard"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:onClick="@{(v)->callback.onClick(v)}"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    app:cardCornerRadius="@dimen/_13sdp"
+                    android:elevation="@dimen/_5sdp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Change"
+                        android:gravity="center"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:textColor="@color/gray"/>
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_5sdp"
+                android:id="@+id/cardResgin"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                app:cardBackgroundColor="@color/white">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:id="@+id/regionCatogery"/>
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:background="@drawable/bg_round_white_filled_less"
+                android:elevation="@dimen/_1sdp"
+                tools:targetApi="lollipop">
+
+                <TextView
+                    android:id="@+id/text_reset"
+                    style="@style/CustomTextViewMedium"
+                    android:layout_width="match_parent"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{(v)->callback.onClick(v)}"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Reset Progress of Lecture, QBank, Tests" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_white_filled_less"
+                android:elevation="@dimen/_1sdp"
+                android:visibility="visible"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                tools:targetApi="lollipop">
+
+                <TextView
+                    android:id="@+id/text_vibration"
+                    style="@style/CustomTextViewMedium"
+                    android:background="@drawable/bg_round_white_filled_less"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Vibration : OFF" />
+
+                <Switch
+                    android:id="@+id/switch_vibration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="@drawable/bg_round_white_filled_less"
+                    android:elevation="@dimen/_1sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_alignParentBottom="true"
+                    tools:targetApi="lollipop">
+
+                    <TextView
+                        android:id="@+id/text_version"
+                        style="@style/CustomTextViewMedium"
+                        android:layout_width="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:onClick="@{(v)->callback.onClick(v)}"
+                        android:padding="@dimen/_10sdp"
+                        android:text="Version -- 1.0" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

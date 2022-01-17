@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.BaseCallback" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/partial_toolbar_back"
+            app:callback="@{callback}" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/CustomTextViewMedium"
+                    android:text="@string/text_report_piracy"
+                    android:textColor="@color/black_pure"
+                    android:textSize="@dimen/_18sdp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/edit_text_name"
+                        style="@style/CustomEditText"
+                        android:ellipsize="end"
+                        android:hint="@string/text_your_name"
+                        android:inputType="textPersonName"
+                        android:singleLine="true"
+                        tools:ignore="Autofill" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:background="@color/view_placeholder_bg_color" />
+
+                    <EditText
+                        android:id="@+id/edit_text_email"
+                        style="@style/CustomEditText"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:ellipsize="end"
+                        android:hint="@string/email_address_optional"
+                        android:inputType="textEmailAddress"
+                        android:lines="1"
+                        android:singleLine="true"
+                        tools:ignore="Autofill" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:background="@color/view_placeholder_bg_color" />
+
+                    <EditText
+                        android:id="@+id/edit_text_mobile_number"
+                        style="@style/CustomEditText"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:ellipsize="end"
+                        android:hint="@string/phone_number_optional"
+                        android:inputType="phone"
+                        android:singleLine="true"
+                        tools:ignore="Autofill" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:background="@color/view_placeholder_bg_color" />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/edit_text_description"
+                    style="@style/CustomEditText"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/bg_round_gray_border"
+                    android:ellipsize="end"
+                    android:gravity="start"
+                    android:hint="@string/text_description_required"
+                    android:inputType="textMultiLine|textNoSuggestions"
+                    android:minLines="4"
+                    android:padding="@dimen/_10sdp"
+                    android:singleLine="true"
+                    android:text=""
+                    tools:ignore="Autofill" />
+
+                <TextView
+                    style="@style/CustomTextViewMedium"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/text_upload_picture_or_video"
+                    android:textSize="@dimen/_10sdp" />
+
+                <RelativeLayout
+                    android:id="@+id/relative_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:gravity="center"
+                    android:visibility="gone">
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="@dimen/_125sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:indeterminate="false"
+                        android:max="100"
+                        android:progress="0"
+                        android:progressTint="@color/blue_text_color"
+                        tools:targetApi="lollipop" />
+
+                    <TextView
+                        android:id="@+id/text_percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@+id/progress_bar"
+                        android:text="0" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_10sdp">
+
+                    <ImageView
+                        android:id="@+id/image_file"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:onClick="@{(v)->callback.onClick(v)}"
+                        app:srcCompat="@drawable/ic_file_upload"
+                        tools:ignore="ContentDescription" />
+
+                    <ImageView
+                        android:id="@+id/image_cancel"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:onClick="@{(v)->callback.onClick(v)}"
+                        android:padding="@dimen/_2sdp"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_close"
+                        tools:ignore="ContentDescription" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <Button
+                        android:id="@+id/button_submit"
+                        style="@style/CustomButton"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:onClick="@{(v)->callback.onClick(v)}"
+                        android:text="@string/submit" />
+
+                    <Button
+                        android:id="@+id/button_reset"
+                        style="@style/CustomButton"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_weight="1"
+                        android:onClick="@{(v)->callback.onClick(v)}"
+                        android:text="@string/text_reset" />
+
+                </LinearLayout>
+
+                <TextView
+                    style="@style/CustomTextViewRegular"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/text_piracy_heading_one"
+                    android:textSize="@dimen/_10sdp" />
+
+                <TextView
+                    style="@style/CustomTextViewRegular"
+                    android:layout_marginBottom="@dimen/_30sdp"
+                    android:text="@string/text_piracy_heading_two"
+                    android:textSize="@dimen/_10sdp" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:visibility="gone">
+
+            <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avl"
+                style="@style/AVLoadingIndicatorView"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_centerInParent="true"
+                app:indicatorColor="@color/blue_text_color"
+                app:indicatorName="BallRotateIndicator" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

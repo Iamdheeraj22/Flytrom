@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.BaseCallback" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
+
+        <LinearLayout
+            android:id="@+id/linear_slides"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:id="@+id/relative_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/toolbar"
+                    layout="@layout/partial_toolbar_back"
+                    app:callback="@{callback}" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image_slide_back_cancel"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:padding="@dimen/_2sdp"
+                    android:src="@drawable/ic_baseline_cancel"
+                    app:tint="#A9A3A5" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardfull"
+                    android:onClick="@{(v)->callback.onClick(v)}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    app:cardBackgroundColor="#747576"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardMaxElevation="@dimen/_3sdp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:src="@drawable/ic_baseline_fullscreen"
+                            app:tint="@color/white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:text="Maximize"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_slides"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/image_slide_back_cancel"
+                    android:overScrollMode="never"
+                    android:scrollbars="none" />
+
+                <include
+                    android:id="@+id/linear_empty_view"
+                    layout="@layout/partial_empty_view"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative_particular_slide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="gone">
+
+            <com.flytrom.learning.utils.ZoomImageView
+                android:id="@+id/image_particular_slide"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:onClick="@{(v)->callback.onClick(v)}"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/image_exit_full_screen"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{(v)->callback.onClick(v)}"
+                android:padding="@dimen/_5sdp"
+                app:srcCompat="@drawable/ic_exit_full_screen"
+                tools:ignore="ContentDescription" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="gone"
+            android:clickable="true"
+            android:id="@+id/rlSlide">
+
+            <ImageView
+                android:id="@+id/image_exit_full_screen2"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{(v)->callback.onClick(v)}"
+                android:padding="@dimen/_5sdp"
+                app:srcCompat="@drawable/ic_back"
+                tools:ignore="ContentDescription" />
+
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPagerMain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/imgBackSlide"
+                android:layout_toStartOf="@id/imgNextSlide"
+                android:layout_below="@id/image_exit_full_screen2" />
+
+            <ImageView
+                android:id="@+id/imgBackSlide"
+                android:layout_width="35dp"
+                android:layout_centerVertical="true"
+                android:layout_height="@dimen/_30sdp"
+                android:tint="@color/black"
+                android:onClick="@{(v)->callback.onClick(v)}"
+                android:visibility="visible"
+                android:src="@drawable/ic_back"/>
+
+            <ImageView
+                android:id="@+id/imgNextSlide"
+                android:layout_width="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_height="@dimen/_30sdp"
+                android:onClick="@{(v)->callback.onClick(v)}"
+                android:tint="@color/black"
+                android:visibility="visible"
+                android:src="@drawable/next_icon_slide"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

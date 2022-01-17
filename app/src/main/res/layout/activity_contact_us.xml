@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.BaseCallback" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/partial_toolbar_back"
+            app:callback="@{callback}" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/CustomTextViewMedium"
+                    android:text="@string/text_contact_us"
+                    android:textColor="@color/black_pure"
+                    android:textSize="@dimen/_18sdp" />
+
+                <TextView
+                    style="@style/CustomTextViewMedium"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/text_via_mobile_or_whats_app"
+                    android:textColor="@color/black_pure" />
+
+                <TextView
+                    style="@style/CustomTextViewMedium"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:autoLink="phone"
+                    android:text="@string/text_flytrom_number"
+                    android:textColor="@color/blue_text_color" />
+
+                <TextView
+                    style="@style/CustomTextViewMedium"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/text_email"
+                    android:textColor="@color/black_pure" />
+
+                <TextView
+                    style="@style/CustomTextViewMedium"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:autoLink="email"
+                    android:text="@string/text_flytrom_email"
+                    android:textColor="@color/blue_text_color" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>

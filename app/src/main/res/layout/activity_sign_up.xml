@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.BaseCallback" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+<!--                <ImageView-->
+<!--                    android:layout_width="@dimen/_80sdp"-->
+<!--                    android:layout_height="@dimen/_80sdp"-->
+<!--                    android:layout_marginStart="@dimen/_minus10sdp"-->
+<!--                    android:src="@drawable/image_auth_top_left"-->
+<!--                    tools:ignore="ContentDescription" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/image_back"-->
+<!--                    android:layout_width="@dimen/_30sdp"-->
+<!--                    android:layout_height="@dimen/_30sdp"-->
+<!--                    android:layout_margin="@dimen/_10sdp"-->
+<!--                    android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                    android:onClick="@{(v)->callback.onClick(v)}"-->
+<!--                    android:padding="@dimen/_5sdp"-->
+<!--                    android:src="@drawable/ic_arrow_white"-->
+<!--                    tools:ignore="ContentDescription" />-->
+
+            </RelativeLayout>
+
+<!--            <ImageView-->
+<!--                android:id="@+id/image_app_logo"-->
+<!--                android:layout_width="@dimen/_70sdp"-->
+<!--                android:layout_height="@dimen/_70sdp"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:layout_marginTop="@dimen/_30sdp"-->
+<!--                android:src="@drawable/ic_app_logo"-->
+<!--                tools:ignore="ContentDescription" />-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/_470sdp"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:src="@drawable/image_auth_bottom_right"-->
+<!--                tools:ignore="ContentDescription" />-->
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                card_view:cardElevation="@dimen/_10sdp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_baseline_cancel"
+                    android:layout_gravity="end"
+                    android:layout_margin="10dp"
+                    android:onClick="@{(v)->callback.onClick(v)}"
+                    android:id="@+id/back_signup"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_20sdp">
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sign Up"
+                        android:textSize="30dp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="20dp"/>
+
+                    <EditText
+                        android:id="@+id/edit_text_first_name"
+                        style="@style/CustomEditText"
+                        android:hint="@string/first_name"
+                        android:inputType="textPersonName"
+                        android:lines="1"
+                        android:layout_marginTop="50dp"
+                        android:maxLength="12"
+                        tools:ignore="Autofill" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:background="@color/view_placeholder_bg_color" />
+
+                    <EditText
+                        android:id="@+id/edit_text_last_name"
+                        style="@style/CustomEditText"
+                        android:hint="@string/last_name"
+                        android:inputType="textPersonName"
+                        android:lines="1"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:maxLength="12"
+                        tools:ignore="Autofill" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:background="@color/view_placeholder_bg_color" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="vertical"
+                        android:id="@+id/rlEmail">
+
+                        <EditText
+                            android:id="@+id/edit_text_email"
+                            style="@style/CustomEditText"
+                            android:hint="@string/email_address"
+                            android:inputType="textEmailAddress"
+                            android:lines="1"
+                            android:visibility="visible"
+                            tools:ignore="Autofill" />
+
+
+                        <EditText
+                            android:id="@+id/edit_text_number"
+                            style="@style/CustomEditText"
+                            android:hint="@string/phone_number"
+                            android:inputType="number"
+                            android:lines="1"
+                            android:visibility="gone"
+                            tools:ignore="Autofill" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:visibility="visible"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:background="@color/view_placeholder_bg_color" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginTop="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/date_of_birth"
+                            style="@style/CustomEditText"
+                            android:hint="Date Of Birth"
+                            android:onClick="@{(v)->callback.onClick(v)}"
+                            android:inputType="textEmailAddress"
+                            android:lines="1"
+                            tools:ignore="Autofill" />
+                    </RelativeLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:visibility="gone"
+                        android:background="@color/view_placeholder_bg_color" />
+
+
+                      <RelativeLayout
+                          android:id="@+id/relative_designation"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="@dimen/_10sdp"
+                          android:background="@drawable/bg_round_white_filled_less"
+                          android:onClick="@{(v)->callback.onClick(v)}"
+                          tools:targetApi="lollipop">
+
+                          <TextView
+                              android:id="@+id/spinner_designation"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/_25sdp"
+                              android:clickable="true"
+                              android:drawableEnd="@drawable/ic_arrow_drop_down"
+                              android:editable="false"
+                              android:gravity="center_vertical"
+                              android:onClick="@{(v)->callback.onClick(v)}"
+                              android:text="Designation"
+                              android:textColor="@color/black"
+                              android:textSize="@dimen/_12sdp" />
+                      </RelativeLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:background="@color/view_placeholder_bg_color" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/region"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_25sdp"
+                            android:clickable="true"
+                            android:drawableEnd="@drawable/ic_arrow_drop_down"
+                            android:editable="false"
+                            android:gravity="center_vertical"
+                            android:onClick="@{(v)->callback.onClick(v)}"
+                            android:text="Region"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+                    </RelativeLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:background="@color/view_placeholder_bg_color" />
+
+<!--                    <EditText-->
+<!--                        android:id="@+id/edit_text_mobile_number"-->
+<!--                        style="@style/CustomEditText"-->
+<!--                        android:layout_marginTop="@dimen/_5sdp"-->
+<!--                        android:enabled="false"-->
+<!--                        android:hint="@string/phone_number"-->
+<!--                        android:inputType="numberDecimal"-->
+<!--                        android:lines="1"-->
+<!--                        tools:ignore="Autofill" />-->
+
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0.5dp"-->
+<!--                        android:layout_marginTop="@dimen/_3sdp"-->
+<!--                        android:background="@color/view_placeholder_bg_color" />-->
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="@dimen/_5sdp">-->
+
+<!--                        <EditText-->
+<!--                            android:id="@+id/edit_text_create_pass"-->
+<!--                            style="@style/CustomEditText"-->
+<!--                            android:hint="@string/create_pass"-->
+<!--                            android:inputType="textPassword"-->
+<!--                            android:lines="1"-->
+<!--                            tools:ignore="Autofill" />-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/image_eye_create_pass"-->
+<!--                            android:layout_width="@dimen/_25sdp"-->
+<!--                            android:layout_height="@dimen/_25sdp"-->
+<!--                            android:layout_alignParentEnd="true"-->
+<!--                            android:layout_centerVertical="true"-->
+<!--                            android:alpha=".5"-->
+<!--                            android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                            android:onClick="@{(v)->callback.onClick(v)}"-->
+<!--                            android:padding="@dimen/_5sdp"-->
+<!--                            android:src="@drawable/ic_hide_eye"-->
+<!--                            tools:ignore="ContentDescription" />-->
+
+<!--                    </RelativeLayout>-->
+
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0.5dp"-->
+<!--                        android:layout_marginTop="@dimen/_3sdp"-->
+<!--                        android:background="@color/view_placeholder_bg_color" />-->
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="@dimen/_5sdp">-->
+
+<!--                        <EditText-->
+<!--                            android:id="@+id/edit_text_confirm_pass"-->
+<!--                            style="@style/CustomEditText"-->
+<!--                            android:hint="@string/confirm_pass"-->
+<!--                            android:inputType="textPassword"-->
+<!--                            android:lines="1"-->
+<!--                            tools:ignore="Autofill" />-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/image_eye_confirm_pass"-->
+<!--                            android:layout_width="@dimen/_25sdp"-->
+<!--                            android:layout_height="@dimen/_25sdp"-->
+<!--                            android:layout_alignParentEnd="true"-->
+<!--                            android:layout_centerVertical="true"-->
+<!--                            android:alpha=".5"-->
+<!--                            android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                            android:onClick="@{(v)->callback.onClick(v)}"-->
+<!--                            android:padding="@dimen/_5sdp"-->
+<!--                            android:src="@drawable/ic_hide_eye"-->
+<!--                            tools:ignore="ContentDescription" />-->
+
+<!--                    </RelativeLayout>-->
+
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0.5dp"-->
+<!--                        android:layout_marginTop="@dimen/_3sdp"-->
+<!--                        android:background="@color/view_placeholder_bg_color" />-->
+
+<!--                    <TextView-->
+<!--                        style="@style/CustomTextViewRegular"-->
+<!--                        android:layout_gravity="start"-->
+<!--                        android:layout_marginTop="@dimen/_15sdp"-->
+<!--                        android:layout_marginBottom="@dimen/_5sdp"-->
+<!--                        android:text="@string/optional"-->
+<!--                        android:textSize="@dimen/_8sdp" />-->
+
+                    <EditText
+                        android:id="@+id/edit_text_cpl_number"
+                        style="@style/CustomEditText"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:hint="@string/cpl_number"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        tools:ignore="Autofill" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:background="@color/view_placeholder_bg_color" />
+
+                    <EditText
+                        android:id="@+id/edit_text_atpl_number"
+                        style="@style/CustomEditText"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:hint="@string/atpl_number"
+                        android:visibility="gone"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        tools:ignore="Autofill" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:visibility="gone"
+                        android:background="@color/view_placeholder_bg_color" />
+
+
+
+                    <Button
+                        android:id="@+id/button_register"
+                        style="@style/CustomButton"
+                        android:layout_marginTop="@dimen/_40sdp"
+                        android:onClick="@{(v)->callback.onClick(v)}"
+                        android:text="@string/register" />
+
+                    <TextView
+                        android:id="@+id/text_login"
+                        style="@style/CustomTextViewMedium"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/already_have_an_account_login"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</layout>

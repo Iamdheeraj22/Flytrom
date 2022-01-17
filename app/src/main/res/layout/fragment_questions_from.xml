@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.BaseCallback" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:background="@color/color_custom_module_back">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/CustomTextViewMedium"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@string/no_of_questions"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_14sdp" />
+
+                    <RelativeLayout
+                        android:id="@+id/relative_ques_number"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@drawable/bg_round_white_filled"
+                        android:elevation="@dimen/_5sdp"
+                        android:onClick="@{(v)->callback.onClick(v)}"
+                        android:padding="@dimen/_7sdp"
+                        tools:targetApi="lollipop">
+
+                        <TextView
+                            android:id="@+id/text_questions"
+                            style="@style/CustomTextViewMedium"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:text="@string/_10"
+                            android:textColor="@color/blue_text_color" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_10sdp"
+                            android:layout_height="@dimen/_10sdp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:rotation="90"
+                            android:src="@drawable/ic_play"
+                            tools:ignore="ContentDescription" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.7dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@color/gray" />
+
+                <TextView
+                    style="@style/CustomTextViewMedium"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/difficulty_level"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_14sdp" />
+
+                <RadioGroup
+                    android:id="@+id/radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/blue_text_color"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_30sdp"
+                        android:text="@string/all"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_14sdp"
+                        tools:targetApi="lollipop" />
+
+                    <RadioButton
+                        android:id="@+id/rb_choose_level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/blue_text_color"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:text="@string/choose_level"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_14sdp"
+                        tools:targetApi="lollipop" />
+
+                </RadioGroup>
+
+                <RelativeLayout
+                    android:id="@+id/relative_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:visibility="gone">
+
+                    <SeekBar
+                        android:id="@+id/seekBar"
+                        style="@style/SeekBarWithoutSteps"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="2"
+                        android:theme="@style/Widget.AppCompat.SeekBar.Discrete"
+                        android:thumb="@drawable/seek_bar_custom_thumb"
+                        tools:targetApi="lollipop" />
+
+                    <TextView
+                        style="@style/CustomTextViewRegular"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:text="@string/easy"
+                        android:textColor="@color/blue_text_color"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <TextView
+                        style="@style/CustomTextViewRegular"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:text="@string/medium"
+                        android:textColor="@color/blue_text_color"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <TextView
+                        style="@style/CustomTextViewRegular"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:text="@string/hard"
+                        android:textColor="@color/blue_text_color"
+                        android:textSize="@dimen/_10sdp" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.7dp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:background="@color/gray" />
+
+                <TextView
+                    style="@style/CustomTextViewMedium"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/questions_from"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_14sdp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_questions_from"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
+                    tools:targetApi="lollipop" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </RelativeLayout>
+
+</layout>

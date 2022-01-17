@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.SimpleRecyclerViewAdapter.SimpleCallback" />
+
+        <variable
+            name="bean"
+            type="com.flytrom.learning.beans.response_beans.others.SlidesBean" />
+
+        <variable
+            name="pos"
+            type="Integer" />
+
+        <import type="com.flytrom.learning.utils.Constants" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_170sdp"
+        android:layout_marginBottom="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/image_slide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="@{(v)->callback.onClick(v,bean)}"
+            android:scaleType="fitXY"
+            app:image_url="@{Constants.MEDIA_URL+bean.file}"
+            app:placeholder="@{@drawable/image_test_ques_p_holder}"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            style="@style/CustomTextViewRegular"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/bg_circle_correct_filled"
+            android:gravity="center"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingTop="@dimen/_1sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:paddingBottom="@dimen/_1sdp"
+            android:text="@{String.valueOf(pos+1)}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp" />
+
+    </RelativeLayout>
+
+</layout>

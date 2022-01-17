@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.BaseCallback" />
+
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayoutTest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_170sdp"
+                    android:background="#FCFBFB"
+                    android:visibility="visible">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:id="@+id/card_back_lectureTests"
+                        android:onClick="@{(v)->callback.onClick(v)}"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_15sdp">
+
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:src="@drawable/ic_back" />
+                    </androidx.cardview.widget.CardView>
+                    <com.joooonho.SelectableRoundedImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/lectureImgTest"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/slide"
+                        app:sriv_left_top_corner_radius="0dip"
+                        app:sriv_right_top_corner_radius="0dip"
+                        app:sriv_left_bottom_corner_radius="@dimen/_30sdp"
+                        app:sriv_right_bottom_corner_radius="@dimen/_30sdp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/lectureNameTest"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Name"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_17sdp"
+                            android:textStyle="bold" />
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_5sdp">
+
+                            <TextView
+                                android:id="@+id/subjectLectureTest"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:layout_marginRight="@dimen/_10sdp"
+                                android:textColor="@color/black"
+                                android:layout_marginBottom="@dimen/_2sdp"
+                                android:text="0 Tests" />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </RelativeLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <include
+            android:id="@+id/toolbar_newTest"
+            layout="@layout/partial_toolbar_back"
+            android:visibility="gone"
+            app:callback="@{callback}" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_10sdp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_tests"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:overScrollMode="never"
+                        android:scrollbars="none" />
+
+                    <include
+                        android:id="@+id/linear_empty_viewTest"
+                        layout="@layout/partial_empty_view"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/progressTest"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <com.wang.avi.AVLoadingIndicatorView
+                        android:id="@+id/avlTest"
+                        style="@style/AVLoadingIndicatorView"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_centerInParent="true"
+                        app:indicatorColor="@color/blue_text_color"
+                        app:indicatorName="BallRotateIndicator" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</layout>

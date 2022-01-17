@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_home"
+        android:checked="true"
+        android:icon="@drawable/ic_home_icon_bottom"
+        android:iconTint="@color/white"
+        android:title="@string/home" />
+
+    <item
+        android:id="@+id/menu_lectures"
+        android:icon="@drawable/ic_video_icon_bottom"
+        android:title="@string/title_lectures" />
+
+    <item
+        android:id="@+id/menu_q_bank"
+        android:icon="@drawable/ic_qbank_icon_bottom"
+        android:title="@string/qbank" />
+
+    <item
+        android:id="@+id/menu_tests"
+        android:icon="@drawable/ic_tests_icon_bottom"
+        android:title="@string/tests" />
+
+</menu>
+
+<!--//Ripple effect
+https://stackoverflow.com/questions/44083507/android-bottom-navigation-bar-customization
+
+or
+
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:state_pressed="true"
+android:drawable="@color/gray_l" />
+<item android:state_focused="false"
+android:drawable="@android:color/transparent" />
+</selector>-->

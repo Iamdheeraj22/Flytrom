@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/imgBackSlide"
+            android:layout_width="50dp"
+            android:layout_centerVertical="true"
+            android:layout_height="@dimen/_30sdp"
+            android:visibility="gone"
+            android:src="@drawable/ic_back"
+            app:tint="@color/black" />
+
+        <com.flytrom.learning.utils.ZoomImageView
+            android:id="@+id/imageViewMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/imgNextSlide"
+            android:layout_width="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_height="@dimen/_30sdp"
+            android:visibility="gone"
+            android:src="@drawable/next_icon_slide"
+            app:tint="@color/black" />
+
+    </RelativeLayout>
+
+</LinearLayout>

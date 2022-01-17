@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.BaseCallback" />
+
+        <variable
+            name="bean"
+            type="com.flytrom.learning.beans.response_beans.subject.SubjectBean" />
+
+        <variable
+            name="pos"
+            type="Integer" />
+
+        <import type="android.view.View" />
+
+        <import type="com.flytrom.learning.utils.UtilMethods" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/relative_subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:onClick="@{(v)->callback.onViewClick(v,pos)}"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp">
+
+            <ImageView
+                android:id="@+id/image_lecturer"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:src="@{bean.selected?@drawable/ic_check_mark:@drawable/ic_un_check_mark}"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                style="@style/CustomTextViewMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toStartOf="@+id/relative_pro"
+                android:layout_toEndOf="@+id/image_lecturer"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:singleLine="true"
+                android:text="@{bean.title}"
+                android:textColor="@color/gray_dark" />
+
+            <RelativeLayout
+                android:id="@+id/relative_pro"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/image_select_chapter"
+                android:background="@drawable/bg_round_exitra_light_gray_filled"
+                android:gravity="center"
+                android:padding="@dimen/_1sdp"
+                android:visibility="@{UtilMethods.getProLockVisibility(bean,pos,2)}">
+
+                <ImageView
+                    android:id="@+id/image_lock"
+                    android:layout_width="12dp"
+                    android:layout_height="11dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_lock_test"
+                    android:tint="@color/gray_dark"
+                    tools:ignore="ContentDescription,TooDeepLayout" />
+
+                <TextView
+                    style="@style/CustomTextViewRegular"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_toEndOf="@+id/image_lock"
+                    android:text="@string/pro"
+                    android:textColor="@color/gray_dark"
+                    android:textSize="@dimen/_6sdp" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/image_select_chapter"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{(v)->callback.onViewClick(v,pos)}"
+                android:padding="@dimen/_4sdp"
+                android:src="@drawable/ic_plus_in_circle"
+                android:tint="@color/blue_text_color"
+                tools:ignore="ContentDescription" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative_chapters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_chapters"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                tools:targetApi="lollipop" />
+
+            <TextView
+                android:id="@+id/text_no_data"
+                style="@style/CustomTextViewMedium"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:text="@string/text_no_chapter_found"
+                android:textColor="@color/gray_light"
+                android:textSize="@dimen/_10sdp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>

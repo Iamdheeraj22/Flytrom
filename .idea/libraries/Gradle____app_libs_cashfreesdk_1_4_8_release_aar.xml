@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: ./app/libs/cashfreesdk-1.4.8-release.aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/76d5cc23d7c9cda312ea82fd1c324396/jetified-cashfreesdk-1.4.8-release/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/76d5cc23d7c9cda312ea82fd1c324396/jetified-cashfreesdk-1.4.8-release/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/76d5cc23d7c9cda312ea82fd1c324396/jetified-cashfreesdk-1.4.8-release/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

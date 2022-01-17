@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.vimeo.stag:stag-library:1.0.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vimeo.stag/stag-library/1.0.0/490d934b8bc3ab4904218e8a1f2614e543b0f4c/stag-library-1.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vimeo.stag/stag-library/1.0.0/ee1f217b2b2d53f313cd7bd7ac9571a0814db06f/stag-library-1.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vimeo.stag/stag-library/1.0.0/ff2efcb75de5a4cb7c4178e698bcd87aac839be/stag-library-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

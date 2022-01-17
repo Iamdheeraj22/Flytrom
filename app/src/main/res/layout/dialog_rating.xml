@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.BaseCustomDialog.DialogListener" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_round_white_filled"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/_15sdp">
+
+        <ImageView
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:src="@drawable/ic_app_logo_dummy"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            style="@style/CustomTextViewRegular"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:text="@string/text_how_was_your_experience"
+            android:textColor="@color/black" />
+
+        <RatingBar
+            android:id="@+id/rating_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:progressBackgroundTint="@color/gray_light_three"
+            android:progressTint="@color/color_gold"
+            android:rating="3"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            tools:targetApi="lollipop" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:background="@color/blue_light" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp">
+
+            <TextView
+                android:id="@+id/text_cancel"
+                style="@style/CustomTextViewRegular"
+                android:layout_width="@dimen/_80sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:onClick="@{(v)->callback.onViewClick(v)}"
+                android:padding="@dimen/_3sdp"
+                android:text="@string/text_cancel"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp" />
+
+            <TextView
+                android:id="@+id/text_rate"
+                style="@style/CustomTextViewRegular"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_alignParentEnd="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:onClick="@{(v)->callback.onViewClick(v)}"
+                android:padding="@dimen/_3sdp"
+                android:text="@string/text_rate"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>

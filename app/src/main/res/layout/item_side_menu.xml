@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.flytrom.learning.base.SimpleRecyclerViewAdapter.SimpleCallback" />
+
+        <variable
+            name="bean"
+            type="com.flytrom.learning.beans.normal_beans.SideMenuBean" />
+
+        <variable
+            name="pos"
+            type="Integer" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/relative_item"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            style="@style/SelectableItemBackgroundWithBorder"
+            android:onClick="@{(v)->callback.onClick(v,bean)}">
+
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_30sdp"
+                app:simpleResourse="@{bean.icon}"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/text_menu_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toEndOf="@+id/iv"
+                android:fontFamily="@font/poppins_medium"
+                android:singleLine="true"
+                android:text="@{bean.name}"
+                android:textColor="@color/color_gray_side_menu_text"
+                android:textSize="@dimen/_12sdp" />
+
+            <ImageView
+                android:id="@+id/image_pro_plan"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_toEndOf="@+id/text_menu_name"
+                android:gravity="center"
+                android:src="@drawable/image_pro_plans"
+                android:textColor="@color/white"
+                android:visibility="@{pos==1?View.VISIBLE:View.GONE}"
+                tools:ignore="ContentDescription" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/relative_item"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:background="@color/black"
+            android:visibility="@{pos==3?View.VISIBLE:View.GONE}" />
+
+    </RelativeLayout>
+
+</layout>
+

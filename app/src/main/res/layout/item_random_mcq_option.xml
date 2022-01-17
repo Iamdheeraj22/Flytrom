@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="bean"
+            type="com.flytrom.learning.beans.response_beans.others.OptionsBean" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_3sdp"
+        app:cardCornerRadius="@dimen/_1sdp"
+        app:cardElevation="@dimen/_1sdp">
+
+        <!--bean.is_answer.equals("Yes")?@color/color_correct_answer:bean.selectedIndex==pos?-->
+        <!--            android:background='@{bean.is_answer.equals("Yes")?@color/color_correct_answer:bean.selectedIndex==pos?bean.is_answer.equals("Yes")?@color/color_correct_answer:@color/color_wrong_answer}'-->
+        <TextView
+            android:id="@+id/text_mcq_option"
+            style="@style/CustomTextViewMedium"
+            android:layout_width="match_parent"
+            android:padding="@dimen/_12sdp"
+            android:textSize="@dimen/_10sdp" />
+
+        <!--bean.is_answer.equals("Yes")?-->
+    </androidx.cardview.widget.CardView>
+
+    <!--
+
+            android:text="@{bean.name}"
+
+            android:onClick="@{(v)->callback.onClick(v,bean)}"-->
+
+</layout>

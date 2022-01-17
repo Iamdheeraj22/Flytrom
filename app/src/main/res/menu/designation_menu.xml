@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Captain" />
+    <item
+        android:title="First Officer" />
+    <item
+        android:title="Student pilot" />
+    <item
+        android:title="Engineer" />
+    <item
+        android:title="Cabin Crew" />
+    <item
+        android:title="Other" />
+
+</menu>
