@@ -110,8 +110,6 @@ public class MyPurchasedPlanFragment extends BaseFragment<FragmentMyPurchasedPla
     }
 
 
-
-
     private void showBottomSheetDialogReceipt(PurchasedPlansBean planBean) {
 
         int currentAmount;

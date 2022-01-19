@@ -39,7 +39,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Video_Category_Fragment extends BaseFragment<FragmentVideoCategoryBinding> implements VideoCategoryAdapter.OnItemClickListnerVideo{
+public class Video_Category_Fragment extends BaseFragment<FragmentVideoCategoryBinding>
+        implements VideoCategoryAdapter.OnItemClickListnerVideo{
 
     Apis apiInterface;
     VideoCategoryAdapter bankCategoryAdapter;
@@ -135,6 +136,5 @@ public class Video_Category_Fragment extends BaseFragment<FragmentVideoCategoryB
             intent.putExtra("name", name);
             startActivity(intent);
         }
-
     }
 }

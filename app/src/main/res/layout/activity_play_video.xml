@@ -791,7 +791,7 @@
             </RelativeLayout>
 
         </LinearLayout>
-<!--Wtermrk-->
+<!-- video Wtermrk-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="220dp"
@@ -1032,6 +1032,8 @@
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
 
+
+        <!-- Full PDF View-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -1143,7 +1145,36 @@
                 android:src="@drawable/ic_baseline_cancel"
                 app:tint="#A9A3A5" />
 
+            <!-- Notes Water mark-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/notesWtermrk"
+                android:layout_marginTop="@dimen/_45sdp"
+                android:visibility="visible">
+
+                <RelativeLayout
+                    android:id="@+id/pvNotesNid"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/notesWatermarkDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textColor="#E1949596" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
         </RelativeLayout>
+        <!--End Full PDF View-->
+
+
+        <!-- Delete the comment -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -149,7 +149,7 @@ public class LecturesFragment extends BaseFragment<FragmentLecturesBinding>
             @Override
             public void apiError(ApiErrorBean t) {
                 hideBaseProgress();
-                //if (t != null) showErrorToast(t.getMessage());
+                if (t != null) showErrorToast(t.getMessage());
             }
 
             @Override
@@ -226,5 +226,11 @@ public class LecturesFragment extends BaseFragment<FragmentLecturesBinding>
     private void hideEmptyView() {
         binding.recyclerSubjects.setVisibility(View.VISIBLE);
         binding.linearEmptyView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getSubjects(mCurrentPage,false);
     }
 }

@@ -123,8 +123,6 @@ public class LecturesActivity extends BaseActivity<ActivityLecturesBinding> impl
     private void getSubjects(int currentPage, boolean progress) {
         showBaseProgress();
 
-        Log.d("Testttt"," == "+currentPage+" : "+currentPage);
-
         mCallGetSubjects = AppController.getInstance().getApis().getSubjects2(getHeader(), String.valueOf(currentPage), "video", "videos_visibility",catogeryId);
         mCallGetSubjects.enqueue(new ResponseHandler<GetSubjectsBean>() {
             @Override
@@ -168,16 +166,19 @@ public class LecturesActivity extends BaseActivity<ActivityLecturesBinding> impl
             @Override
             public void apiError(ApiErrorBean t) {
                 hideBaseProgress();
+                Log.i("subjectError",t.getMessage());
                 showToast(t.getMessage());
-                //if (t != null) showErrorToast(t.getMessage());
             }
 
             @Override
             public void onComplete(Call<GetSubjectsBean> call, Throwable t) {
                 hideBaseProgress();
-//                showToast(t.getLocalizedMessage());
+                if(t!=null){
+                    showToast(t.getLocalizedMessage());
+                }
+
                 //onCallComplete(call, t);
-                //  if (t != null) getSubjectsFromRoom();
+                //if (t != null) getSubjectsFromRoom();
             }
 
             @Override

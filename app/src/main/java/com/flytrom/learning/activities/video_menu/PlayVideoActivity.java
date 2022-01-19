@@ -241,6 +241,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
     /////////////////////////////////////
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onViewReady(Bundle savedInstanceState, Intent intent) {
         trackSelector = new DefaultTrackSelector(this);
@@ -296,6 +297,8 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
         binding.PVid.setText(phone);
         binding.PVemail.setText(email);
 
+        // Set the data in watermark on notes pdf
+        binding.notesWatermarkDetails.setText(name+"\n"+phone+"\n"+email);
 
         speedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -462,15 +465,14 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                 long t = sec + (60 * min) + (3600 * hour);
 
                 mCurrentVideoDuration = Integer.parseInt(String.valueOf(t));
-                if (!mVideoBean.getStatus().equals(Constants.CONTENT_STATUS[2]))
-                    mVideoBean.setStatus(Constants.CONTENT_STATUS[2]);
+//                if (!mVideoBean.getStatus().equals(Constants.CONTENT_STATUS[2]))
+//                    mVideoBean.setStatus(Constants.CONTENT_STATUS[2]);
                 mVideoBean.setSeconds(mCurrentVideoDuration);
                 if (t >= mCurrentVideoDuration) {
                     updateVideoStatusToServer(Constants.CONTENT_STATUS[2]);
                 } else {
                     updateVideoStatusToServer(Constants.CONTENT_STATUS[1]);
                 }
-
                 player.pause();
             }
         });
@@ -1191,6 +1193,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
 
             String isDownloading = getIntent().getStringExtra("isDownloading");
 
+
             if (isDownloading != null) {
                 if (isDownloading.equalsIgnoreCase("yes")) {
                     linear_download.setVisibility(View.GONE);
@@ -1199,12 +1202,16 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                 }
             }
 
+
+            Log.i("isDownloaded",mVideoBean.getIsDownloaded());
+
             if (mVideoBean.getIsDownloaded().equalsIgnoreCase("yes")) {
                 linear_download.setVisibility(View.VISIBLE);
                 binding.relativeProgress.setVisibility(View.GONE);
                 binding.imageDownload.setImageResource(R.drawable.tick);
                 binding.textDownload.setText("Downlaoded");
-            } else {
+            }
+            else {
                 linear_download.setVisibility(View.VISIBLE);
                 binding.relativeProgress.setVisibility(View.GONE);
                 binding.imageDownload.setImageResource(R.drawable.ic_download);
@@ -1827,7 +1834,6 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
 //                prepareDownloadVideo();
 
                 if (mVideoBean.getIsDownloaded().equalsIgnoreCase("yes")) {
-
                     new AlertDialog.Builder(this)
                             .setTitle("Confirmation!")
                             .setMessage("Are you sure you want to remove download?")
@@ -1948,6 +1954,8 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
             case R.id.cardfull:
 //                 openPdfActivity();
                 binding.rlPDF.setVisibility(View.VISIBLE);
+                binding.notesWtermrk.setVisibility(View.VISIBLE);
+                startTimerNotesVisible();
                 player.pause();
                 binding.linearChatLine.setBackgroundColor(Color.parseColor("#00FFFDFD"));
 
@@ -1955,6 +1963,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                 break;
             case R.id.cardmin:
 //                 openPdfActivity();
+                binding.notesWtermrk.setVisibility(View.VISIBLE);
                 binding.linearChatLine.setBackgroundColor(Color.parseColor("#00FFFDFD"));
                 binding.rlPDF.setVisibility(View.GONE);
                 break;
@@ -2851,8 +2860,8 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
     }
 
 
-    //Show watermark for 4 seconds and hide for 30 seconds notes
-    //Show
+
+    //Show watermark for 4 seconds and hide for 30 seconds Video
     private void startTimerVisible() {
         Handler handler = new Handler();
         handler.postDelayed(() -> {
@@ -2869,7 +2878,6 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
         }, 30000);
     }
     private void startTimerHide() {
-
         Handler handler = new Handler();
         handler.postDelayed(() -> {
             binding.pvNid.setVisibility(View.GONE);
@@ -2877,8 +2885,31 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
         }, 4000);
     }
 
+    //Show watermark for 4 seconds and hide for 30 seconds notes
+    private void startTimerNotesVisible() {
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            Random r = new Random();
+            int top = r.nextInt(1000 - 10) + 10;
+            int right = r.nextInt(500 - 10) + 10;
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(right, top, 0, 0);
+            binding.pvNotesNid.setLayoutParams(params);
+            binding.pvNotesNid.setVisibility(View.VISIBLE);
+//            if (!isVideoStop) {
+//                binding.pvNotesNid.setVisibility(View.VISIBLE);
+//            }
+            startTimerNotesHide();
+        }, 30000);
+    }
+    private void startTimerNotesHide() {
 
-
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            binding.pvNotesNid.setVisibility(View.GONE);
+            startTimerNotesVisible();
+        }, 4000);
+    }
 
 
 
@@ -2894,12 +2925,10 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
             @Override
             public void onResponse(@NotNull Call<VimeoResponse> call, @NotNull Response<VimeoResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-
                     for (int i = 0; i < response.body().getRequest().getFiles().getProgressive().size(); i++) {
                         if (response.body().getRequest().getFiles().getProgressive().get(i).getQuality().equalsIgnoreCase(s)) {
                             if (response.body().getRequest().getFiles().getProgressive().size() > 0)
                                 createMediaItem(response.body().getRequest().getFiles().getProgressive().get(i).getUrl());
-
 
                             MediaPlayer mp = new MediaPlayer();
                             try {
@@ -2959,8 +2988,10 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                     if (successBean.getStatus() == Constants.SUCCESS_CODE) {
                         if (type.equals("downlaod")) {
                             mVideoBean.setIsDownloaded("yes");
+                            getData();
                         } else {
                             mVideoBean.setIsDownloaded("no");
+                            getData();
                         }
                     }
                 }
