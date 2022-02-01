@@ -190,9 +190,9 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_toLeftOf="@id/cardNext"
                     android:text="@{bean.title_category}"
-                    android:visibility='@{bean.isCompleted.equalsIgnoreCase("1")?View.VISIBLE:View.GONE}'
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textSize="@dimen/_10sdp"
+                    android:visibility='@{bean.isCompleted.equalsIgnoreCase("1")?View.VISIBLE:View.GONE}' />
 
                 <TextView
                     android:id="@+id/catName1"
@@ -202,10 +202,9 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_toLeftOf="@id/cardNext"
                     android:text="@{bean.title_category}"
-                    android:visibility='@{bean.isCompleted.equalsIgnoreCase("0")?View.VISIBLE:View.GONE}'
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10sdp"
-                    />
+                    android:visibility='@{bean.isCompleted.equalsIgnoreCase("0")?View.VISIBLE:View.GONE}' />
 
                 <TextView
                     android:id="@+id/subjectName"
@@ -243,10 +242,10 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="@dimen/_100sdp"
                     android:layout_marginBottom="15dp"
-                    android:visibility='@{bean.isCompleted.equalsIgnoreCase("0")?View.VISIBLE:View.GONE}'
                     android:text='@{bean.totalQuestions.equals("0")?bean.totalQuestions+" Question":bean.totalQuestions+" Questions"}'
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textSize="@dimen/_10sdp"
+                    android:visibility='@{bean.isCompleted.equalsIgnoreCase("0")?View.VISIBLE:View.GONE}' />
 
                 <TextView
                     android:id="@+id/chapterName1"
@@ -255,10 +254,10 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginBottom="15dp"
-                    android:visibility='@{bean.isCompleted.equalsIgnoreCase("1")?View.VISIBLE:View.GONE}'
                     android:text='@{bean.totalQuestions.equals("0")?bean.totalQuestions+" Question":bean.totalQuestions+" Questions"}'
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textSize="@dimen/_10sdp"
+                    android:visibility='@{bean.isCompleted.equalsIgnoreCase("1")?View.VISIBLE:View.GONE}' />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardNext"

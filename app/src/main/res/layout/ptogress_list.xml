@@ -31,7 +31,8 @@
 
                <LinearLayout
                    android:layout_width="0dp"
-                   android:layout_height="match_parent"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/lecturesProgress"
                    android:layout_weight="50"
                    android:gravity="center_horizontal"
                    android:orientation="vertical">
@@ -96,6 +97,7 @@
                                android:layout_width="match_parent"
                                android:layout_height="wrap_content"
                                android:text=""
+                               android:layout_marginBottom="@dimen/_10sdp"
                                android:textAlignment="center"
                                android:textSize="8sp"
                                android:textStyle="bold" />
@@ -130,6 +132,7 @@
                    android:layout_height="wrap_content"
                    android:layout_weight="50"
                    android:orientation="vertical"
+                   android:id="@+id/qBankProgress"
                    android:gravity="center_horizontal"
                    android:layout_gravity="center_horizontal">
                    <LinearLayout
@@ -248,10 +251,12 @@
                        android:layout_marginBottom="@dimen/_5sdp"
                        android:textColor="@color/color_gray_side_menu_text"/>
                </LinearLayout>
+
                <LinearLayout
                    android:layout_width="0dp"
                    android:layout_height="wrap_content"
                    android:layout_weight="50"
+                   android:id="@+id/testProgress"
                    android:orientation="vertical"
                    android:gravity="center_horizontal"
                    android:layout_gravity="center_horizontal">

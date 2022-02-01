@@ -159,6 +159,8 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
     private PdfRenderer.Page mCurrentPage;
     //private PDFConfig config;
     private Random mRandom;
+    SharedPreferences appDataSharedPreferences;
+    SharedPreferences.Editor appDataEditor;
     Apis apiInterface;
     GetCommentAdapter getCommentAdapter;
     private Handler mHandler;
@@ -224,7 +226,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
     TextView currentPlay;
     Boolean play = false;
     Boolean isVideoStop = false;
-    Boolean isDownloading = false;
+    String isVideoDownloading = "";
 
     int total_duration_in_seconds = 0;
 
@@ -244,6 +246,8 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
     @SuppressLint("SetTextI18n")
     @Override
     protected void onViewReady(Bundle savedInstanceState, Intent intent) {
+        appDataSharedPreferences=getSharedPreferences(Constants.APP_LOCAL_DATA,Context.MODE_PRIVATE);
+        appDataEditor=appDataSharedPreferences.edit();
         trackSelector = new DefaultTrackSelector(this);
         player = new SimpleExoPlayer.Builder(this).setTrackSelector(trackSelector).build();
         ImageView farwordBtn = binding.videoView2.findViewById(R.id.fwd);
@@ -259,7 +263,6 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
         text_download = findViewById(R.id.text_download);
         linear_download = findViewById(R.id.linear_download);
         addListener();
-
 
         elEditComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -290,6 +293,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
         MySharedPreferences.getInstance().saveString(this, ConstantsNew.BACK, "0");
 
         startTimerVisible();
+       // checkVideoIsDownloading();
 
 
         //Set the data in watermark on video
@@ -299,6 +303,9 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
 
         // Set the data in watermark on notes pdf
         binding.notesWatermarkDetails.setText(name+"\n"+phone+"\n"+email);
+
+        // Set the data in watermark on notes pdf at minimize pdf time
+        binding.notesWatermarkMinDetails.setText(name+"\n"+phone+"\n"+email);
 
         speedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -355,13 +362,9 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
 
 
                         }
-
-
                     }
                 });
                 builder.show();
-
-
             }
         });
         farwordBtn.setOnClickListener(new View.OnClickListener() {
@@ -445,34 +448,29 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
             @Override
             public void onClick(View v) {
                 isVideoStop = true;
-                String test = String.valueOf(currentPlay.getText());
-
-                String time[] = test.split(":");
-
-                long hour = 0;
-                long min = 0;
-                long sec = 0;
-                if (time.length > 2) {
-                    hour = Long.parseLong(time[0]);
-                    min = Long.parseLong(time[1]);
-                    sec = Long.parseLong(time[2]);
-
-                } else {
-                    min = Long.parseLong(time[0]);
-                    sec = Long.parseLong(time[1]);
-                }
-
-                long t = sec + (60 * min) + (3600 * hour);
-
-                mCurrentVideoDuration = Integer.parseInt(String.valueOf(t));
-//                if (!mVideoBean.getStatus().equals(Constants.CONTENT_STATUS[2]))
-//                    mVideoBean.setStatus(Constants.CONTENT_STATUS[2]);
-                mVideoBean.setSeconds(mCurrentVideoDuration);
-                if (t >= mCurrentVideoDuration) {
-                    updateVideoStatusToServer(Constants.CONTENT_STATUS[2]);
-                } else {
-                    updateVideoStatusToServer(Constants.CONTENT_STATUS[1]);
-                }
+//                String test = String.valueOf(currentPlay.getText());
+//                String time[] = test.split(":");
+//                long hour = 0;
+//                long min = 0;
+//                long sec = 0;
+//                if (time.length > 2) {
+//                    hour = Long.parseLong(time[0]);
+//                    min = Long.parseLong(time[1]);
+//                    sec = Long.parseLong(time[2]);
+//                } else {
+//                    min = Long.parseLong(time[0]);
+//                    sec = Long.parseLong(time[1]);
+//                }
+//                long t = sec + (60 * min) + (3600 * hour);
+//                mCurrentVideoDuration = Integer.parseInt(String.valueOf(t));
+////                if (!mVideoBean.getStatus().equals(Constants.CONTENT_STATUS[2]))
+////                    mVideoBean.setStatus(Constants.CONTENT_STATUS[2]);
+//                mVideoBean.setSeconds(mCurrentVideoDuration);
+//                if (t >= mCurrentVideoDuration) {
+//                    updateVideoStatusToServer(Constants.CONTENT_STATUS[2]);
+//                } else {
+//                    updateVideoStatusToServer(Constants.CONTENT_STATUS[1]);
+//                }
                 player.pause();
             }
         });
@@ -558,9 +556,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                                     return true;
                                 }
                             });
-
                             popup.show();
-
                         }
                     });
 
@@ -688,6 +684,8 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                 switch (playbackState) {
                     case Player.STATE_BUFFERING:
                         break;
+
+                        //Video player seekbar is completed then api is work
                     case Player.STATE_ENDED:
                         isVideoStop = true;
                         markUnMarkVideoCompleted("mark");
@@ -829,13 +827,10 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
 
         mVideoBean.setSeconds(mCurrentVideoDuration);
 
-        if (mVideoBean.getStatus().equals(Constants.CONTENT_STATUS[2])) {
-
-
-        } else {
-
+        if(t!=total_duration_in_seconds){
             updateVideoStatusToServer(Constants.CONTENT_STATUS[1]);
-
+        }else if(t==total_duration_in_seconds){
+            updateVideoStatusToServer(Constants.CONTENT_STATUS[2]);
         }
 
         player.pause();
@@ -853,32 +848,22 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
             showFullScreen(false);
             binding.playerControlView.setFullscreenState(false);
         } else {
-            updateVideoStatusInBean(Constants.CONTENT_STATUS[1]);
+            //updateVideoStatusInBean(Constants.CONTENT_STATUS[1]);
             /*if (AppController.getInstance().isInternetOn()) {
-
                 if (mVideoBean.getStatus().equals(Constants.CONTENT_STATUS[2])||mVideoBean.getStatus().equals(Constants.CONTENT_STATUS[3])){
-
-
                 }else{
-
                     updateVideoStatusToServer(Constants.CONTENT_STATUS[1]);
-
                 }
-
-
             }*/
 
 
+
+
+            ///Changes 1
             Bundle bundle = new Bundle();
             bundle.putSerializable("videoBean", mVideoBean);
             Intent intent = new Intent();
             intent.putExtras(bundle);
-            if (isDownloading) {
-                intent.putExtra("isDownloading", "yes");
-            } else {
-                intent.putExtra("isDownloading", "no");
-            }
-            intent.putExtra("videoId", videoId);
             setResult(RESULT_OK, intent);
             finishActivityWithBackAnim();
         }
@@ -1053,8 +1038,6 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                     RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
             binding.playerControlView.setFitsSystemWindows(false);
             binding.playerControlView.setPadding(0, 0, 0, 0);
-
-
             // show system windows
 //            showSystemUi(true);
         }
@@ -1080,6 +1063,12 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
         });
         binding.recyclerVideoTopics.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerVideoTopics.setAdapter(mVideoTopicsAdapter);
+
+
+
+
+
+
 
 
         setBaseCallback(baseCallback);
@@ -1184,24 +1173,25 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
         }
     }
 
+    private void checkVideoIsDownloading(){
+        if(getIntent().getExtras() != null){
+
+            VideoBean videoBean=(VideoBean) getIntent().getSerializableExtra("videoBean");
+            Log.e("VIDEOOO",isVideoDownloading);
+            //Changes 2
+            if(!videoBean.getIsDownloaded().equalsIgnoreCase("yes")){
+                Log.e("VIDEOOO",videoBean.getIsDownloaded());
+
+            }
+        }
+    }
+
     private void getData() {
+
         if (getIntent().getExtras() != null) {
             mVideoBean = (VideoBean) getIntent().getSerializableExtra("videoBean");
             videoId = getIntent().getStringExtra("videoId");
-            Log.d("videoId",videoId);
             videoVimeoLink = mVideoBean.getVideoLink();
-
-            String isDownloading = getIntent().getStringExtra("isDownloading");
-
-
-            if (isDownloading != null) {
-                if (isDownloading.equalsIgnoreCase("yes")) {
-                    linear_download.setVisibility(View.GONE);
-                    binding.relativeProgress.setVisibility(View.VISIBLE);
-                    binding.linearDownload.setVisibility(View.GONE);
-                }
-            }
-
 
             Log.i("isDownloaded",mVideoBean.getIsDownloaded());
 
@@ -1212,18 +1202,25 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                 binding.textDownload.setText("Downlaoded");
             }
             else {
-                linear_download.setVisibility(View.VISIBLE);
-                binding.relativeProgress.setVisibility(View.GONE);
-                binding.imageDownload.setImageResource(R.drawable.ic_download);
-                binding.textDownload.setText("Downlaod");
-            }
+                isVideoDownloading=appDataSharedPreferences.getString("video"+ mVideoBean.getId(),"no");
+                if(isVideoDownloading.equalsIgnoreCase("yes")){
+                    linear_download.setVisibility(View.GONE);
+                    binding.linearDownload.setVisibility(View.GONE);
+                    binding.relativeProgress.setVisibility(View.VISIBLE);
 
+                }else {
+                    linear_download.setVisibility(View.VISIBLE);
+                    binding.relativeProgress.setVisibility(View.GONE);
+                    Log.e("VIDEOOO","HERERER2");
+                    binding.imageDownload.setImageResource(R.drawable.ic_download);
+                    binding.textDownload.setText("Downlaod");
+                }
+            }
 
             callVimeoAPIRequest(mVideoBean.getVideoLink());
             getCommentApi(String.valueOf(videoId));
             if (mVideoBean != null) {
                 pdfUrl = mVideoBean.getNotes();
-
                 binding.toolbar.textTitle.setText(mVideoBean.getCategory());
                 binding.toolbar.textTitle.setTextColor(Color.parseColor("#484848"));
             }
@@ -1314,7 +1311,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                         OpenPdfActivity(file.getAbsolutePath());
                     }
                 } else {
-                    //showBaseProgress();
+                    ////showBaseProgress();
                     AsyncLoadPdf runner = new AsyncLoadPdf(PlayVideoActivity.this, PlayVideoActivity.this, mVideoBean.getTitle() + mVideoBean.getId());
                     runner.execute(Constants.MEDIA_URL + mVideoBean.getNotes(), mVideoBean.getTitle() + mVideoBean.getId());
                 }
@@ -1343,7 +1340,6 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
     }
 
     private void updateListItem(DownloadStatus status) {
-
         if (status != null) {
             binding.linearDownload.setVisibility(View.GONE);
             binding.relativeProgress.setVisibility(View.VISIBLE);
@@ -1383,6 +1379,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
 
     private void setDownloadedUI(String type) {
         binding.relativeProgress.setVisibility(View.GONE);
+        Log.e("VIDEOOO","HERERER3");
         binding.linearDownload.setVisibility(View.VISIBLE);
         if (type.equals("downloaded")) {
             binding.imageDownload.setImageResource(R.drawable.ic_right);
@@ -1638,7 +1635,6 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
         if (!mVideoBean.getStatus().equals(Constants.CONTENT_STATUS[2]))
             mVideoBean.setStatus(type);
         mVideoBean.setSeconds(mCurrentVideoDuration);
-
         mDBRepositoryKotlin.updateSecondAndStatusOfVideo(mVideoBean);
     }
 
@@ -1676,7 +1672,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
     }
 
     private void markUnMarkVideoCompleted(String value) {
-        showBaseProgress();
+        //showBaseProgress();
         HashMap<String, String> map = new HashMap<>();
         map.put("video_id", String.valueOf(mVideoBean.getId()));
         if (value.equals("un_mark")) {
@@ -1693,7 +1689,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
             map.put("video_duration", total_duration_in_seconds + "");
         }
 
-        mCallMarkComplete = AppController.getInstance().getApis().markCompleted(getHeader(), map);
+        mCallMarkComplete = AppController.getInstance().getApis().updateVideoStatus(getHeader(), map);
         mCallMarkComplete.enqueue(new ResponseHandler<SuccessBean>() {
             @Override
             public void onSuccess(SuccessBean successBean) {
@@ -1843,18 +1839,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
 
-                                    SharedPreferences preferences = getSharedPreferences("flytrom", Context.MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = preferences.edit();
-                                    editor.clear();
-                                    editor.apply();
-
                                     downloadVideoStatusUpdate(mVideoBean, "remove");
-
-                                    linear_download.setVisibility(View.VISIBLE);
-                                    binding.relativeProgress.setVisibility(View.GONE);
-                                    binding.imageDownload.setImageResource(R.drawable.ic_download);
-                                    binding.textDownload.setText("Downlaod");
-
                                 }
                             })
 
@@ -1864,8 +1849,6 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                             .show();
 
                 } else {
-
-
                     PopupMenu popup = new PopupMenu(this, binding.linearDownload);
                     //Inflating the Popup using xml file
                     popup.getMenuInflater().inflate(R.menu.download_popup, popup.getMenu());
@@ -1873,7 +1856,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                     //registering popup with OnMenuItemClickListener
                     popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         public boolean onMenuItemClick(MenuItem item) {
-                            isDownloading = true;
+
                             if (item.getTitle().toString().equalsIgnoreCase("High Quality")) {
                                 callVimeoAPIRequest2("720p");
                             } else {
@@ -1932,6 +1915,8 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                 if (mVideoBean != null) {
                     if (mVideoBean.getNotes() != null && !mVideoBean.getNotes().equals("")) {
                         binding.rlRecy.setVisibility(View.VISIBLE);
+                        binding.notesMinWtermrk.setVisibility(View.VISIBLE);
+                        startTimerNotesMinVisible();
                         binding.llDet.setVisibility(View.GONE);
                         new RetrivePDFfromUrl().execute("https://learningapp.flytrom.com/media/" + pdfUrl);
                     } else {
@@ -1958,12 +1943,10 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                 startTimerNotesVisible();
                 player.pause();
                 binding.linearChatLine.setBackgroundColor(Color.parseColor("#00FFFDFD"));
-
                 new RetrivePDFfromUrl2().execute("https://learningapp.flytrom.com/media/" + pdfUrl);
                 break;
             case R.id.cardmin:
 //                 openPdfActivity();
-                binding.notesWtermrk.setVisibility(View.VISIBLE);
                 binding.linearChatLine.setBackgroundColor(Color.parseColor("#00FFFDFD"));
                 binding.rlPDF.setVisibility(View.GONE);
                 break;
@@ -2086,6 +2069,21 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 break;
 
+            case R.id.rotateNotesV:
+                binding.rotateNotesV2.setVisibility(View.VISIBLE);
+                binding.rotateNotesV.setVisibility(View.GONE);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                hideSystemUi();
+                break;
+
+            case R.id.rotateNotesV2:
+                binding.rotateNotesV2.setVisibility(View.GONE);
+                binding.rotateNotesV.setVisibility(View.VISIBLE);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                showSystemUi();
+                break;
+
+
             case R.id.dltComent:
                 binding.rlDltCmt.setVisibility(View.GONE);
                 callDeleteCommentApi(cmntId);
@@ -2146,19 +2144,20 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
 
             //                Full Slide
             case  R.id.slideViewFullLayout:
+            case R.id.slideMinViewFullLayout:
                 initView2(mVideoBean);
                 binding.tool.setVisibility(View.GONE);
                 binding.Wtermrk.setVisibility(View.GONE);
+                startTimerVisible();
                 binding.reportTextViewLayout.setVisibility(View.GONE);
                 binding.slideViewLayout.setVisibility(View.VISIBLE);
                 break;
 
-
-
             case R.id.cardSlideMin:
                 binding.tool.setVisibility(View.VISIBLE);
+                binding.scrollView.setVisibility(View.GONE);
                 binding.Wtermrk.setVisibility(View.VISIBLE);
-                binding.reportTextViewLayout.setVisibility(View.VISIBLE);
+                binding.reportTextViewLayout.setVisibility(View.GONE);
                 binding.slideViewLayout.setVisibility(View.GONE);
                 break;
             case R.id.imgNextSlide1:
@@ -2259,7 +2258,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
 
     //Comment on the subject video
     private void callCommnetApi(HashMap<String, String> map) {
-        showBaseProgress();
+        //showBaseProgress();
         apiInterface.sendComment(getHeader(), map).enqueue(new Callback<SendCommentModel>() {
             @Override
             public void onResponse(@NonNull Call<SendCommentModel> call, @NonNull Response<SendCommentModel> response) {
@@ -2285,38 +2284,57 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
     }
 
     public void getCommentApi(String valueOf) {
-        showBaseProgress();
+        //showBaseProgress();
         apiInterface.getVideoComment(getHeader(), "1", valueOf).enqueue(new Callback<GerCommentModel>() {
             @Override
             public void onResponse(Call<GerCommentModel> call, Response<GerCommentModel> response) {
                 GerCommentModel faqModle = response.body();
                 hideBaseProgress();
-                if (response.isSuccessful()) {
-                    String userId = PrefUtils.getInstance().getUser().getId();
-                    List<GetCommentDatum> list = new ArrayList<>();
-                    for (int i = 0; i < faqModle.getData().size(); i++) {
-//                        if (faqModle.getData().get(i).is_approve.equals("1")) {
-//                            GetCommentDatum model = faqModle.data.get(i);
-//                            list.add(model);
-//                        }
-
-                        list.add(faqModle.getData().get(i));
-                        if(!faqModle.getData().get(i).getUser_name().equals("")){
-                            if (faqModle.getData().get(i).is_approve.equals("1")) {
-                                GetCommentDatum model = faqModle.data.get(i);
-                                list.add(model);
-                            }
-                        }
-                        //                        if (!faqModle.getData().get(i).user_id.equals(userId)) {
+//                if (response.isSuccessful()) {
+//                    String userId = PrefUtils.getInstance().getUser().getId();
+//                    List<GetCommentDatum> list = new ArrayList<>();
+//                    for (int i = 0; i < faqModle.getData().size(); i++) {
+////                        if (faqModle.getData().get(i).is_approve.equals("1")) {
+////                            GetCommentDatum model = faqModle.data.get(i);
+////                            list.add(model);
+////                        }
+//
+//                        list.add(faqModle.getData().get(i));
+//                        if(!faqModle.getData().get(i).getUser_name().equals("")){
 //                            if (faqModle.getData().get(i).is_approve.equals("1")) {
 //                                GetCommentDatum model = faqModle.data.get(i);
 //                                list.add(model);
 //                            }
-//                        } else {
-//                            list.add(faqModle.data.get(i));
 //                        }
+//                        //                        if (!faqModle.getData().get(i).user_id.equals(userId)) {
+////                            if (faqModle.getData().get(i).is_approve.equals("1")) {
+////                                GetCommentDatum model = faqModle.data.get(i);
+////                                list.add(model);
+////                            }
+////                        } else {
+////                            list.add(faqModle.data.get(i));
+////                        }
+//                    }
+//                    getCommentAdapter.setList(list);
+//                    Log.d("PlayVideoActivity", response.message());
+//                    hideBaseProgress();
+//                } else {
+//                    Log.d("BVHJH<B2", response.message());
+//                }
+
+                if (response.isSuccessful()) {
+                    String userId = PrefUtils.getInstance().getUser().getId();
+                    List<GetCommentDatum> list = new ArrayList<>();
+                    for (int i = 0; i < faqModle.getData().size(); i++) {
+                        if (!faqModle.getData().get(i).user_id.equals(userId)) {
+                            if (faqModle.getData().get(i).is_approve.equals("1")) {
+                                GetCommentDatum model = faqModle.data.get(i);
+                                list.add(model);
+                            }
+                        } else {
+                            list.add(faqModle.data.get(i));
+                        }
                     }
-                    Collections.reverse(list);
                     getCommentAdapter.setList(list);
                     Log.d("PlayVideoActivity", response.message());
                     hideBaseProgress();
@@ -2336,6 +2354,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
     }
 
     private void setAdapter(List<GetCommentDatum> data) {
+        Collections.reverse(data);
         getCommentAdapter = new GetCommentAdapter(PlayVideoActivity.this, data, this::onitemClickVideo, this::onClickEdit);
         binding.videoComments.setHasFixedSize(true);
         binding.videoComments.setLayoutManager(new LinearLayoutManager(this));
@@ -2358,7 +2377,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
     }
     //Call delete comment api
     public void callDeleteCommentApi(String id) {
-        showBaseProgress();
+        //showBaseProgress();
         mCallResetTest = AppController.getInstance().getApis().deleteComment(getHeader(), id);
 
         mCallResetTest.enqueue(new ResponseHandler<SuccessBean>() {
@@ -2708,7 +2727,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                         prepareAllThings(file.getAbsolutePath());
                     }
                 } else {
-                    showBaseProgress();
+                    //showBaseProgress();
                     AsyncLoadPdf runner = new AsyncLoadPdf(PlayVideoActivity.this, PlayVideoActivity.this, mVideoBean.getTitle() + mVideoBean.getId());
                     runner.execute(Constants.MEDIA_URL + mVideoBean.getNotes(), mVideoBean.getTitle() + mVideoBean.getId());
                 }
@@ -2895,20 +2914,45 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             params.setMargins(right, top, 0, 0);
             binding.pvNotesNid.setLayoutParams(params);
-            binding.pvNotesNid.setVisibility(View.VISIBLE);
+            binding.pvNotesNid.setVisibility(View.GONE);
 //            if (!isVideoStop) {
 //                binding.pvNotesNid.setVisibility(View.VISIBLE);
 //            }
             startTimerNotesHide();
-        }, 30000);
+        }, 4000);
     }
     private void startTimerNotesHide() {
 
         Handler handler = new Handler();
         handler.postDelayed(() -> {
-            binding.pvNotesNid.setVisibility(View.GONE);
+            binding.pvNotesNid.setVisibility(View.VISIBLE);
             startTimerNotesVisible();
+        }, 30000);
+    }
+
+    //Show watermark for 4 seconds and hide for 30 seconds on notes at minimize time
+    private void startTimerNotesMinVisible(){
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            Random r = new Random();
+            int top = r.nextInt(600 - 10) + 10;
+            int right = r.nextInt(500 - 10) + 10;
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(right, top, 0, 0);
+            binding.pvNotesMinNid.setLayoutParams(params);
+            binding.pvNotesMinNid.setVisibility(View.GONE);
+//            if (!isVideoStop) {
+//                binding.pvNotesNid.setVisibility(View.VISIBLE);
+//            }
+            startTimerNotesMinHide();
         }, 4000);
+    }
+    private void startTimerNotesMinHide(){
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            binding.pvNotesMinNid.setVisibility(View.VISIBLE);
+            startTimerNotesMinVisible();
+        }, 30000);
     }
 
 
@@ -2944,8 +2988,9 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                             if (pvDownloadLink.equalsIgnoreCase("")) {
                                 Toast.makeText(PlayVideoActivity.this, "Video link not available", Toast.LENGTH_SHORT).show();
                             } else {
-
-                                new DownloadFileTask(PlayVideoActivity.this, progress_bar, text_percent, linear_download, text_download, binding.relativeProgress, binding.imageDownload, new OnDownloadListner() {
+                                appDataEditor.putString("video"+mVideoBean.getId(),"yes");
+                                appDataEditor.apply();
+                                new DownloadFileTask(mVideoBean,PlayVideoActivity.this, binding.relativeProgress, String.valueOf(mVideoBean.getId()),progress_bar, text_percent, linear_download, text_download, binding.relativeProgress, binding.imageDownload, new OnDownloadListner() {
                                     @Override
                                     public void downloadVideo(String status) {
                                         if (status.equals("yes")) {
@@ -2975,7 +3020,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
     }
 
     private void downloadVideoStatusUpdate(VideoBean bean, String type) {
-        showBaseProgress();
+        //showBaseProgress();
         HashMap<String, String> map = new HashMap<>();
         map.put("id", String.valueOf(bean.getId()));
         map.put("type", "videos");
@@ -2987,10 +3032,22 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                 if (successBean != null) {
                     if (successBean.getStatus() == Constants.SUCCESS_CODE) {
                         if (type.equals("downlaod")) {
+                            showBaseProgress();
                             mVideoBean.setIsDownloaded("yes");
+                            linear_download.setVisibility(View.VISIBLE);
+                            binding.relativeProgress.setVisibility(View.GONE);
+                            binding.imageDownload.setImageResource(R.drawable.tick);
+                            binding.textDownload.setText("Downlaoded");
+                            hideBaseProgress();
                             getData();
-                        } else {
+                        }else if(type.equals("remove")) {
+                            showBaseProgress();
                             mVideoBean.setIsDownloaded("no");
+                            linear_download.setVisibility(View.VISIBLE);
+                            binding.relativeProgress.setVisibility(View.GONE);
+                            binding.imageDownload.setImageResource(R.drawable.ic_download);
+                            binding.textDownload.setText("Downlaod");
+                            hideBaseProgress();
                             getData();
                         }
                     }

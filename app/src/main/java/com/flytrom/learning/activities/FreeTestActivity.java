@@ -130,7 +130,8 @@ public class FreeTestActivity extends BaseActivity<ActivityFreeTestBinding>
 
     private void initView() {
         solveMCQList = new ArrayList<>();
-        mParticularSubTestsAdapter = new SimpleRecyclerViewAdapter<>(R.layout.test_play_list, BR.bean, new SimpleRecyclerViewAdapter.SimpleCallback<TestBean>() {
+        mParticularSubTestsAdapter = new SimpleRecyclerViewAdapter<>(R.layout.test_play_list, BR.bean,
+                new SimpleRecyclerViewAdapter.SimpleCallback<TestBean>() {
             @Override
             public void onClick(View v, TestBean testBean) {
 
@@ -138,20 +139,20 @@ public class FreeTestActivity extends BaseActivity<ActivityFreeTestBinding>
 
             @Override
             public void onClickWithPosition(View v, TestBean testBean, int pos) {
-
-                if (PrefUtils.getInstance().getSelectedSubject() != null)
-                    showPurchasePlanDialog(getString(R.string.test));
-                else {
-                    switch (v.getId()) {
-                        case R.id.btn_download:
-                            testBean.setPosition(pos);
-                            downloadTest(testBean);
-                            break;
-                        case R.id.relative_test:
-                            goToGoingToStartTest(testBean, pos);
-                            break;
-                    }
+                switch (v.getId()) {
+                    case R.id.btn_download:
+                        testBean.setPosition(pos);
+                        downloadTest(testBean);
+                        break;
+                    case R.id.relative_test:
+                        goToGoingToStartTest(testBean, pos);
+                        break;
                 }
+//                if (PrefUtils.getInstance().getSelectedSubject() != null)
+//                    showPurchasePlanDialog(getString(R.string.test));
+//                else {
+//
+//                }
             }
         });
 
@@ -358,8 +359,6 @@ public class FreeTestActivity extends BaseActivity<ActivityFreeTestBinding>
                                 }
 
                             }
-
-
 
                             if (mCurrentPage == 1)
                                 mParticularSubTestsAdapter.setList(getTestBean.getData());

@@ -14,6 +14,7 @@ public class Constants {
     public static final String MEDIA_URL = "https://learningapp.flytrom.com/media/";
     public static final String PRIVACY_POLICY_URL = "http://3.17.254.50/testfly/terms.pdf";
     public static final String APP_DB_NAME = "Flytrom";
+    public static final String APP_LOCAL_DATA="FlytromAppData";
     public static final String FREE = "Free";
     public static final String PAID = "Paid";
     public static final String CASH_FREE_TRANSACTION_STAGE = "TEST";//TEST or PROD

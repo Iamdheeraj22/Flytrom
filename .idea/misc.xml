@@ -3,16 +3,29 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/drawable/custom_progress.xml" value="0.19375" />
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/drawable/ic_user_placeholder.xml" value="0.19375" />
         <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/activity_lectures.xml" value="0.1" />
-        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/activity_play_video.xml" value="0.21" />
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/activity_login_new.xml" value="0.1734375" />
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/activity_play_video.xml" value="0.36376210235131395" />
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/activity_profile.xml" value="0.1734375" />
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/activity_progress.xml" value="0.1734375" />
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/activity_rate_content.xml" value="0.1734375" />
         <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/activity_slides.xml" value="0.1734375" />
         <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/activity_subscribe.xml" value="0.1734375" />
         <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/add_comment_alertdilog_box.xml" value="0.1734375" />
-        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/fragment_my_purchased_plan.xml" value="0.1734375" />
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/comment_layout.xml" value="0.1734375" />
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/fragment_my_purchased_plan.xml" value="0.13" />
         <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/item_image_slides.xml" value="0.1734375" />
-        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/item_my_purchase_plan.xml" value="0.1734375" />
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/item_my_purchase_plan.xml" value="0.21" />
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/item_test.xml" value="0.15" />
         <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/partial_toolbar_back.xml" value="0.1734375" />
-        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/video_item_list.xml" value="0.1" />
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/ptogress_list.xml" value="0.1734375" />
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/test_play_list.xml" value="0.1734375" />
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/testt_item_list.xml" value="0.5" />
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/ustom_controls.xml" value="0.25" />
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/video_item_list.xml" value="0.75" />
+        <entry key="..\:/Flytrom/Flytrom/app/src/main/res/layout/video_play_list.xml" value="0.25" />
       </map>
     </option>
   </component>

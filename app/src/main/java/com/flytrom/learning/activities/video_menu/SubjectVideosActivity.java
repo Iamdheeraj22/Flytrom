@@ -46,6 +46,7 @@ public class SubjectVideosActivity extends BaseActivity<ActivitySubjectVideosBin
         image = intent1.getStringExtra("image");
         Glide.with(this).load(Constants.MEDIA_URL + image).into(binding.lectureImgVideo);
         Log.d("QWERTYUIO","image "+Constants.MEDIA_URL + image);
+        getData();
         initView();
     }
 
@@ -68,6 +69,7 @@ public class SubjectVideosActivity extends BaseActivity<ActivitySubjectVideosBin
     @Override
     protected void onResume() {
         super.onResume();
+        getData();
         initView();
     }
 
@@ -132,7 +134,7 @@ public class SubjectVideosActivity extends BaseActivity<ActivitySubjectVideosBin
         binding.recyclerVideos.setAdapter(mParticularSubVideosAdapter);
 
         setBaseCallback(baseCallback);
-        getData();
+
     }
 
     private void goToPlayVideo(VideoBean videoBean, int pos) {

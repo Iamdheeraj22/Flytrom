@@ -146,7 +146,10 @@ public class BindingAdapterUtils {
         String min;
         String _seconds;
         String hrs;
-        if (hours==0){
+        if(sec<=60){
+            textView.setText(sec+" Seconds ");
+        }
+        else if (hours==0){
             if (minutes<=9){
                min =  "0"+minutes;
             }
@@ -159,7 +162,8 @@ public class BindingAdapterUtils {
                 _seconds = second+"";
             }
             textView.setText(min+" Minutes ");
-        }else{
+        }
+        else{
 
             if (hours<=9){
                 hrs = "0"+hours;

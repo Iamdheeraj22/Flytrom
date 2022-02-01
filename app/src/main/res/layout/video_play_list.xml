@@ -206,9 +206,9 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
-                    app:setTimeDuration='@{bean.video_durations+""}'
                     android:textColor="@color/gray"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textSize="@dimen/_10sdp"
+                    app:setTimeDuration='@{bean.video_durations+""}' />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardNext"

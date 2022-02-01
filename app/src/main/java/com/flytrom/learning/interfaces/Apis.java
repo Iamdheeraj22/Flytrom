@@ -128,14 +128,16 @@ public interface Apis {
                                         @FieldMap Map<String, String> map);
 
     @FormUrlEncoded
+    @POST("mark_complete")
+    Call<SuccessBean> markCompleted(@HeaderMap Map<String, String> headerMap,
+                                    @FieldMap Map<String, String> map);
+
+
+    @FormUrlEncoded
     @POST("mark_downloaded")
     Call<SuccessBean> markDownload(@HeaderMap Map<String, String> headerMap,
                                    @FieldMap Map<String, String> map);
 
-    @FormUrlEncoded
-    @POST("mark_complete")
-    Call<SuccessBean> markCompleted(@HeaderMap Map<String, String> headerMap,
-                                    @FieldMap Map<String, String> map);
 
     @FormUrlEncoded
     @POST("bookmark_question")

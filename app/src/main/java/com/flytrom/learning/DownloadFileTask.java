@@ -1,5 +1,7 @@
 package com.flytrom.learning;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,6 +10,7 @@ import android.os.Environment;
 import android.os.PowerManager;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,7 +20,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flytrom.learning.activities.video_menu.PlayVideoActivity;
+import com.flytrom.learning.beans.normal_beans.ApiErrorBean;
+import com.flytrom.learning.beans.response_beans.auth.UserDataBean;
+import com.flytrom.learning.beans.response_beans.others.SuccessBean;
+import com.flytrom.learning.beans.response_beans.videos.VideoBean;
+import com.flytrom.learning.utils.AppController;
+import com.flytrom.learning.utils.Constants;
 import com.flytrom.learning.utils.OnDownloadListner;
+import com.flytrom.learning.utils.PrefUtils;
+import com.flytrom.learning.utils.ResponseHandler;
 
 import org.androidannotations.annotations.sharedpreferences.SharedPref;
 
@@ -30,30 +41,44 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.inject.Inject;
+
+import retrofit2.Call;
 
 public class DownloadFileTask extends AsyncTask<String, Integer, String> {
 
     private Context context;
+    private String videoId;
     private PowerManager.WakeLock mWakeLock;
-        ProgressDialog mProgressDialog;
+    ProgressDialog mProgressDialog;
     ProgressBar progressBar;
     TextView text_percent;
     TextView text_download;
     LinearLayout linear_download;
     RelativeLayout progressLayout;
     ImageView imageDownlaod;
+    RelativeLayout relativeLayoutProgress;
     OnDownloadListner callback;
+    VideoBean mVideoBean;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
+    private int downloadPercentage=0;
 
     public DownloadFileTask(Context context) {
         this.context = context;
     }
 
 
-    public DownloadFileTask(Context context, ProgressBar progressBar, TextView text_percent, LinearLayout linear_download, TextView text_download, RelativeLayout progressLayout, ImageView imageDownlaod, OnDownloadListner callback) {
+    public DownloadFileTask(VideoBean mVideoBean,Context context, RelativeLayout relativeProgress, String videoId,ProgressBar progressBar, TextView text_percent, LinearLayout linear_download, TextView text_download, RelativeLayout progressLayout,ImageView imageDownlaod, OnDownloadListner callback) {
+        this.mVideoBean=mVideoBean;
         this.context = context;
+        this.relativeLayoutProgress=relativeProgress;
+        this.videoId=videoId;
         this.progressBar = progressBar;
         this.text_percent = text_percent;
         this.text_download = text_download;
@@ -165,9 +190,13 @@ public class DownloadFileTask extends AsyncTask<String, Integer, String> {
         if (progressBar != null) {
             progressBar.setMax(100);
             progressBar.setProgress(progress[0]);
-            text_percent.setText(progress[0]+"%");
-            Log.i("Downloading video",progress[0]+"%");
-            Log.d("downloadpercentage",progress[0]+"%");
+            if(!((Activity)context).isFinishing()){
+                text_percent.setText(progress[0]+"%");
+            }
+            downloadPercentage=progress[0];
+            if(progress[0]==100){
+                updateDownloadMark();
+            }
         }else if (mProgressDialog != null) {
             mProgressDialog.setIndeterminate(false);
             mProgressDialog.setMax(100);
@@ -175,24 +204,82 @@ public class DownloadFileTask extends AsyncTask<String, Integer, String> {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onPostExecute(String result) {
         mWakeLock.release();
-        if (mProgressDialog != null) {
-            mProgressDialog.dismiss();
+        setTheSharedPreferences();
+        try {
+            if (mProgressDialog != null) {
+                mProgressDialog.dismiss();
+            }
+            if (result != null){
+                Toast.makeText(context, "Download error: " + result, Toast.LENGTH_LONG).show();}
+            else{
+                editor.remove("video"+videoId).apply();
+                Toast.makeText(context, "File downloaded", Toast.LENGTH_SHORT).show();
+                linear_download.setVisibility(View.VISIBLE);
+                progressLayout.setVisibility(View.GONE);
+                text_download.setText("Downloaded");
+                imageDownlaod.setImageResource(R.drawable.tick);
+            }
+        } catch (WindowManager.BadTokenException e) {
+            Log.e("WindowManagerBad ", e.toString());
         }
-        if (result != null)
-            Toast.makeText(context, "Download error: " + result, Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(context, "File downloaded", Toast.LENGTH_SHORT).show();
-
-        linear_download.setVisibility(View.VISIBLE);
-        progressLayout.setVisibility(View.GONE);
-        text_download.setText("Downloaded");
-        imageDownlaod.setImageResource(R.drawable.tick);
-
-        callback.downloadVideo("yes");
-
     }
 
+    private void setTheSharedPreferences()
+    {
+        sharedPreferences= context.getSharedPreferences(Constants.APP_LOCAL_DATA,Context.MODE_PRIVATE);
+        editor=sharedPreferences.edit();
+    }
+
+
+    private void updateDownloadMark(){
+        HashMap<String, String> map = new HashMap<>();
+        map.put("id", String.valueOf(videoId));
+        map.put("type", "videos");
+
+        Call<SuccessBean> mCallMarkDownload = AppController.getInstance().getApis().markDownload(getHeader(), map);
+        mCallMarkDownload.enqueue(new ResponseHandler<SuccessBean>() {
+            @Override
+            public void onSuccess(SuccessBean successBean) {
+                if (successBean != null) {
+                    if (successBean.getStatus() == Constants.SUCCESS_CODE) {
+                        if(((Activity)context).isFinishing()){
+                            mVideoBean.setIsDownloaded("yes");
+                        }
+                    }
+                }
+            }
+            @Override
+            public void apiError(ApiErrorBean t) {
+                if (t != null){
+                    //Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+            }
+            @Override
+            public void onComplete(Call<SuccessBean> call, Throwable t) {
+
+                onCallComplete(call, t);
+            }
+        });
+    }
+
+    //get the header information
+    protected Map<String, String> getHeader() {
+        Map<String, String> map = new HashMap<>();
+        UserDataBean bean = PrefUtils.getInstance().getUser();
+        if (bean != null) {
+            map.put(Constants.KEY_SESSION_ID,bean.getSession_id());
+            map.put(Constants.KEY_USER_ID, bean.getId());
+        }
+        return map;
+    }
+
+    protected <T> void onCallComplete(Call<T> call, Throwable t) {
+        if (!call.isCanceled() && t != null) {
+            //Toast.makeText(context,t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
 }

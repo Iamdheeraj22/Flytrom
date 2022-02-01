@@ -2,6 +2,7 @@ package com.flytrom.learning.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -51,6 +52,27 @@ public class GetSubCommentAdapter extends RecyclerView.Adapter<GetSubCommentAdap
     public void onBindViewHolder(@NonNull @NotNull GetSubCommentAdapter.ViewHolder holder, int position) {
 
 
+        holder.tv_commnet.setText(data.get(position).getComment());
+
+        if(data.get(position).getUser_type().equalsIgnoreCase("Admin")){
+            holder.tv_user_name.setText(data.get(position).getAdmin_comment_name());
+            holder.tv_commnet.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+            if (data.get(position).getAdmin_image_name() == null || data.get(position).getAdmin_image_name().equalsIgnoreCase("")) {
+                holder.iv_profile.setBackgroundResource(R.drawable.ic_user_placeholder);
+            } else {
+                Glide.with(context).load(Constants.MEDIA_URL + data.get(position).getAdmin_image_name()).into(holder.iv_profile);
+            }
+        }else {
+            holder.tv_user_name.setText(data.get(position).getUser_name());
+            if (data.get(position).getUser_picture() == null || data.get(position).getUser_picture().equalsIgnoreCase("")) {
+                holder.iv_profile.setBackgroundResource(R.drawable.ic_user_placeholder);
+            } else {
+                Glide.with(context).load(Constants.MEDIA_URL + data.get(position).getUser_picture()).into(holder.iv_profile);
+            }
+        }
+
+
+
         if (data.get(position).getUser_id().equalsIgnoreCase(MySharedPreferences.getInstance().getString(context, ConstantsNew.USER_ID))){
             holder.tv_edit_sub.setVisibility(View.VISIBLE);
         }else {
@@ -87,13 +109,7 @@ public class GetSubCommentAdapter extends RecyclerView.Adapter<GetSubCommentAdap
                     holder.tv_user_name.setTextColor(Color.parseColor("#000000"));
                 }
             }
-            holder.tv_user_name.setText(data.get(position).getUser_name());
-            holder.tv_commnet.setText(data.get(position).getComment());
-            if (data.get(position).getUser_picture() == null || data.get(position).getUser_picture().equalsIgnoreCase("")){
-                holder.iv_profile.setBackgroundResource(R.drawable.ic_user_placeholder);
-            }else {
-                Glide.with(context).load(Constants.MEDIA_URL + data.get(position).getUser_picture()).into(holder.iv_profile);
-            }
+
 
 
         Log.d("FCGJFC",data.get(position).getComment());

@@ -449,12 +449,12 @@
                                             android:id="@+id/text_version"
                                             style="@style/CustomTextViewMedium"
                                             android:layout_width="match_parent"
-                                            android:hint="Logout"
-                                            android:gravity="center"
-                                            android:textColor="@color/white"
-                                            android:textColorHint="@color/white"
+                                            android:layout_height="match_parent"
                                             android:layout_centerHorizontal="true"
-                                            android:layout_height="match_parent"/>
+                                            android:gravity="center"
+                                            android:hint="Logout"
+                                            android:textColor="@color/white"
+                                            android:textColorHint="@color/white" />
 
                                     </RelativeLayout>
 

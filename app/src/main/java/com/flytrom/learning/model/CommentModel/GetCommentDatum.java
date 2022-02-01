@@ -9,6 +9,8 @@ public class GetCommentDatum {
     public String comment;
     public String link_id;
     public String created_at;
+    public String admin_comment_name;
+    public String admin_image_name;
     public String user_name;
     public String user_picture;
     public String user_type;
@@ -16,6 +18,22 @@ public class GetCommentDatum {
     public String is_approve;
     public String file_for_comment;
     public List<SubComment> sub_comments;
+
+    public String getAdmin_comment_name() {
+        return admin_comment_name;
+    }
+
+    public void setAdmin_comment_name(String admin_comment_name) {
+        this.admin_comment_name = admin_comment_name;
+    }
+
+    public String getAdmin_image_name() {
+        return admin_image_name;
+    }
+
+    public void setAdmin_image_name(String admin_image_name) {
+        this.admin_image_name = admin_image_name;
+    }
 
     public String getFile_for_comment() {
         return file_for_comment;

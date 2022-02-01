@@ -63,8 +63,6 @@ public class GetSubCommentAdapterMore extends RecyclerView.Adapter<GetSubComment
             tv_commnet = itemView.findViewById(R.id.tv_commnet);
             iv_profile = itemView.findViewById(R.id.iv_profile);
             tv_time = itemView.findViewById(R.id.titleQbank);
-
-
         }
     }
 }

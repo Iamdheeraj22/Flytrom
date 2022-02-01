@@ -140,7 +140,6 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.ViewHo
             accuracyTxt = itemView.findViewById(R.id.accuracyTxt);
             accuracyTxt2 = itemView.findViewById(R.id.accuracyTxt2);
 
-
         }
     }
 }

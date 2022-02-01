@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -49,11 +50,45 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:id="@+id/linearEmptyView"
+                    android:layout_height="match_parent">
 
-                <include
-                    android:id="@+id/linear_empty_view"
-                    layout="@layout/partial_empty_view"
-                    android:visibility="gone" />
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        app:cardCornerRadius="20dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_gravity="center_horizontal"
+                        app:cardBackgroundColor="@color/color_red">
+                        <RelativeLayout
+                            android:id="@+id/relative_explore_plans"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:onClick="@{(v)->callback.onClick(v)}"
+                            tools:targetApi="lollipop">
+
+                            <TextView
+                                android:id="@+id/text_version"
+                                style="@style/CustomTextViewMedium"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerHorizontal="true"
+                                android:gravity="center"
+                                android:hint="Explore Plans"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:paddingEnd="@dimen/_10sdp"
+                                android:textColor="@color/white"
+                                android:textColorHint="@color/white" />
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_plans"

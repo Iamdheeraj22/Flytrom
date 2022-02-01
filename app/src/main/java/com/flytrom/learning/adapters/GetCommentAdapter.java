@@ -1,6 +1,7 @@
 package com.flytrom.learning.adapters;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -71,7 +72,24 @@ public class GetCommentAdapter extends RecyclerView.Adapter<GetCommentAdapter.Vi
     public void onBindViewHolder(@NonNull @NotNull GetCommentAdapter.ViewHolder holder, int position) {
 
         try {
-            holder.tv_user_name.setText(data.get(position).getUser_name());
+            if(data.get(position).getUser_type().equalsIgnoreCase("Admin")){
+                holder.tv_commnet.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                holder.tv_user_name.setText(data.get(position).getAdmin_comment_name());
+                if (data.get(position).getAdmin_image_name() == null || data.get(position).getAdmin_image_name().equalsIgnoreCase("")) {
+                    holder.iv_profile.setBackgroundResource(R.drawable.ic_user_placeholder);
+                } else {
+                    Glide.with(context).load(Constants.MEDIA_URL + data.get(position).getAdmin_image_name()).into(holder.iv_profile);
+                }
+            }else {
+                holder.tv_user_name.setText(data.get(position).getUser_name());
+                if (data.get(position).getUser_picture() == null || data.get(position).getUser_picture().equalsIgnoreCase("")) {
+                    holder.iv_profile.setBackgroundResource(R.drawable.ic_user_placeholder);
+                } else {
+                    Glide.with(context).load(Constants.MEDIA_URL + data.get(position).getUser_picture()).into(holder.iv_profile);
+                }
+            }
+
+
             holder.tv_commnet.setText(data.get(position).getComment());
 
             if (data.get(position).getUser_type().equalsIgnoreCase("Admin")) {
@@ -84,18 +102,13 @@ public class GetCommentAdapter extends RecyclerView.Adapter<GetCommentAdapter.Vi
             } else {
                 holder.tv_edit.setVisibility(View.GONE);
             }
-
-            if (data.get(position).getUser_picture() == null || data.get(position).getUser_picture().equalsIgnoreCase("")) {
-                holder.iv_profile.setBackgroundResource(R.drawable.ic_user_placeholder);
-            } else {
-                Glide.with(context).load(Constants.MEDIA_URL + data.get(position).getUser_picture()).into(holder.iv_profile);
-            }
             List<SubComment> sublist = data.get(position).getSub_comments();
             Collections.reverse(sublist);
             if (sublist.size() > 0) {
                 holder.rv_sub_comments.setVisibility(View.VISIBLE);
                 GetSubCommentAdapter getSubCommentAdapter;
                 holder.rv_sub_comments.setLayoutManager(new LinearLayoutManager(context));
+                Collections.reverse(sublist);
                 getSubCommentAdapter = new GetSubCommentAdapter(context, sublist);
                 holder.rv_sub_comments.setItemAnimator(new DefaultItemAnimator());
                 holder.rv_sub_comments.setAdapter(getSubCommentAdapter);

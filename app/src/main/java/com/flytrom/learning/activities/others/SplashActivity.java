@@ -56,7 +56,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
     private Runnable mSplashRunnable = () -> {
         if (PrefUtils.getInstance().getUser() != null) {
             goToHomeScreen();
-        } else {
+        } else if(PrefUtils.getInstance().getUser()==null) {
             startActivity(new Intent(SplashActivity.this, LoginNewActivity.class));
             goNextAnimation();
             finish();

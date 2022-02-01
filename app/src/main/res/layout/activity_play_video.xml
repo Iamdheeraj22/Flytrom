@@ -155,11 +155,11 @@
                 <!---Main Screen components-->
                 <ScrollView
                     android:id="@+id/scroll_view"
-                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:overScrollMode="never"
-                    android:scrollbars="none">
+                    android:scrollbars="none"
+                    android:visibility="visible">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -546,6 +546,8 @@
                     </RelativeLayout>
 
                 </ScrollView>
+
+                <!--MiniMize PDF view-->
                 <RelativeLayout
                     android:id="@+id/rlRecy"
                     android:layout_width="match_parent"
@@ -566,7 +568,6 @@
                         android:layout_height="match_parent"
                         android:id="@+id/pdfVideo"
                         android:background="@color/white"/>
-
 
                     <ProgressBar
                         android:id="@+id/mProgress"
@@ -620,6 +621,29 @@
                         android:padding="@dimen/_2sdp"
                         android:src="@drawable/ic_baseline_cancel"
                         app:tint="#A9A3A5" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/notesMinWtermrk"
+                        android:layout_marginTop="@dimen/_45sdp"
+                        android:visibility="visible">
+
+                        <RelativeLayout
+                            android:id="@+id/pvNotesMinNid"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/notesWatermarkMinDetails"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Name"
+                                android:textColor="#E1949596" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
 
                 </RelativeLayout>
                 <!--End-->
@@ -744,7 +768,10 @@
                             android:id="@+id/image_exit_full_screen2"
                             android:layout_width="@dimen/_30sdp"
                             android:layout_height="@dimen/_30sdp"
-                            android:layout_margin="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
                             android:background="?attr/selectableItemBackgroundBorderless"
                             android:clickable="true"
                             android:focusable="true"
@@ -752,6 +779,39 @@
                             android:padding="@dimen/_5sdp"
                             app:srcCompat="@drawable/ic_back"
                             tools:ignore="ContentDescription" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/slideMinViewFullLayout"
+                            android:onClick="@{(v)->callback.onClick(v)}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            app:cardBackgroundColor="#747576"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardMaxElevation="@dimen/_3sdp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_30sdp"
+                                    android:layout_height="@dimen/_30sdp"
+                                    android:src="@drawable/ic_baseline_fullscreen"
+                                    app:tint="@color/white" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:text="Maximize"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
 
 
                         <androidx.viewpager.widget.ViewPager
@@ -793,9 +853,9 @@
         </LinearLayout>
 <!-- video Wtermrk-->
         <RelativeLayout
+            android:id="@+id/Wtermrk"
             android:layout_width="match_parent"
             android:layout_height="220dp"
-            android:id="@+id/Wtermrk"
             android:layout_marginTop="@dimen/_45sdp"
             android:visibility="visible">
 
@@ -1156,8 +1216,7 @@
                 <RelativeLayout
                     android:id="@+id/pvNotesNid"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone">
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/notesWatermarkDetails"
@@ -1350,26 +1409,83 @@
                        android:visibility="gone"
                        app:tint="#A9A3A5" />
 
+                   <RelativeLayout
+                       android:layout_width="wrap_content"
+                       android:layout_toLeftOf="@+id/cardSlideMin"
+                       android:layout_marginTop="@dimen/_10sdp"
+                       android:layout_marginEnd="@dimen/_10sdp"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="bottom">
+
+                       <androidx.cardview.widget.CardView
+                           android:id="@+id/rotateNotesV"
+                           android:layout_width="wrap_content"
+                           android:layout_height="31dp"
+                           android:layout_gravity="center_vertical"
+                           android:layout_marginRight="@dimen/_7sdp"
+                           android:onClick="@{(v)->callback.onClick(v)}"
+                           app:cardBackgroundColor="#747576"
+                           app:cardCornerRadius="@dimen/_5sdp">
+
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_gravity="center"
+                               android:layout_marginLeft="@dimen/_5sdp"
+                               android:layout_marginTop="@dimen/_2sdp"
+                               android:layout_marginRight="@dimen/_5sdp"
+                               android:layout_marginBottom="@dimen/_2sdp"
+                               android:text="Rotate"
+                               android:textColor="@color/white" />
+                       </androidx.cardview.widget.CardView>
+                       <androidx.cardview.widget.CardView
+                           android:layout_width="wrap_content"
+                           android:layout_height="31dp"
+                           app:cardCornerRadius="@dimen/_5sdp"
+                           android:layout_gravity="center_vertical"
+                           android:layout_marginRight="@dimen/_7sdp"
+                           android:id="@+id/rotateNotesV2"
+                           android:visibility="gone"
+                           android:onClick="@{(v)->callback.onClick(v)}"
+                           app:cardBackgroundColor="@color/gray">
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Rotate"
+                               android:layout_gravity="center"
+                               android:layout_marginTop="@dimen/_2sdp"
+                               android:layout_marginBottom="@dimen/_2sdp"
+                               android:layout_marginRight="@dimen/_5sdp"
+                               android:layout_marginLeft="@dimen/_5sdp"
+                               android:textColor="@color/white"/>
+                       </androidx.cardview.widget.CardView>
+
+                   </RelativeLayout>
+
                    <androidx.cardview.widget.CardView
                        android:id="@+id/cardSlideMin"
                        android:onClick="@{(v)->callback.onClick(v)}"
                        android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
+                       android:layout_height="31dp"
                        android:layout_alignParentEnd="true"
-                       android:layout_marginTop="@dimen/_5sdp"
+                       android:layout_marginTop="@dimen/_10sdp"
                        android:layout_marginRight="@dimen/_10sdp"
                        app:cardBackgroundColor="#747576"
                        app:cardCornerRadius="@dimen/_5sdp"
                        app:cardMaxElevation="@dimen/_3sdp">
 
-                       <LinearLayout
+                       <RelativeLayout
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:orientation="horizontal">
 
                            <ImageView
-                               android:layout_width="@dimen/_30sdp"
-                               android:layout_height="@dimen/_30sdp"
+                               android:layout_width="@dimen/_20sdp"
+                               android:layout_height="@dimen/_20sdp"
+                               android:id="@+id/minMaxImage"
+                               android:layout_marginTop="@dimen/_5sdp"
+                               android:layout_marginStart="@dimen/_5sdp"
+                               android:layout_centerVertical="true"
                                android:src="@drawable/ic_exit_full_screen"
                                app:tint="@color/white" />
 
@@ -1377,10 +1493,14 @@
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"
                                android:layout_gravity="center_vertical"
-                               android:layout_marginRight="@dimen/_5sdp"
-                               android:text="Maximize"
-                               android:textColor="@color/white" />
-                       </LinearLayout>
+                               android:layout_marginStart="@dimen/_5sdp"
+                               android:layout_marginEnd="@dimen/_5sdp"
+                               android:layout_toEndOf="@id/minMaxImage"
+                               android:text="Minimize"
+                               android:layout_centerVertical="true"
+                               android:textColor="@color/white"
+                               tools:ignore="HardcodedText" />
+                       </RelativeLayout>
                    </androidx.cardview.widget.CardView>
 
 

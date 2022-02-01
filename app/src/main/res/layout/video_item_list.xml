@@ -171,66 +171,67 @@
                </androidx.cardview.widget.CardView>
 
            </RelativeLayout>
-           <RelativeLayout
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:layout_marginRight="@dimen/_10sdp"
-               android:layout_toRightOf="@id/rlCards">
 
-               <TextView
-                   android:id="@+id/catName"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_marginLeft="@dimen/_10sdp"
-                   android:layout_marginTop="@dimen/_15sdp"
-                   android:text="@{bean.title_category}"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_toRightOf="@id/rlCards">
+
+                <TextView
+                    android:id="@+id/catName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@{bean.title_category}"
                     android:textColor="@color/black" />
 
-               <TextView
-                   android:id="@+id/subjectName"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_below="@id/catName"
-                   android:layout_marginStart="@dimen/_10sdp"
-                   android:layout_marginLeft="@dimen/_10sdp"
-                   android:layout_marginTop="@dimen/_5sdp"
-                   android:text="@{bean.title}"
-                   android:textStyle="bold"
-                   android:textSize="@dimen/_13sdp"
-                   android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/subjectName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/catName"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="@{bean.title}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13sdp"
+                    android:textStyle="bold" />
 
-               <TextView
-                   android:id="@+id/chapterName"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_alignParentBottom="true"
-                   android:layout_marginStart="@dimen/_10sdp"
-                   android:layout_marginLeft="@dimen/_10sdp"
-                   android:layout_marginBottom="@dimen/_10sdp"
-                   android:text='@{(bean.totalVideos.equals("0")||bean.totalVideos.equals("1"))?bean.totalVideos+" video":bean.totalVideos+" videos"}'
-                   android:textColor="@color/black"
-                   android:textSize="@dimen/_10sdp" />
+                <TextView
+                    android:id="@+id/chapterName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:text='@{(bean.totalVideos.equals("0")||bean.totalVideos.equals("1"))?bean.totalVideos+" video":bean.totalVideos+" videos"}'
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp" />
 
-               <androidx.cardview.widget.CardView
-                   android:id="@+id/cardNext"
-                   android:layout_width="@dimen/_30sdp"
-                   android:layout_height="@dimen/_30sdp"
-                   android:layout_alignParentEnd="true"
-                   android:elevation="@dimen/_2sdp"
-                   android:layout_margin="@dimen/_10sdp"
-                   card_view:cardBackgroundColor="#E7EBEB"
-                   card_view:cardCornerRadius="@dimen/_20sdp"
-                   android:layout_alignParentBottom="true"
-                   android:visibility="visible">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardNext"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:elevation="@dimen/_2sdp"
+                    android:visibility="visible"
+                    card_view:cardBackgroundColor="#E7EBEB"
+                    card_view:cardCornerRadius="@dimen/_20sdp">
 
-                   <ImageView
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:gravity="center"
-                       android:padding="@dimen/_5sdp"
-                       android:src="@drawable/ic_baseline_arrow_forward" />
-               </androidx.cardview.widget.CardView>
-           </RelativeLayout>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_baseline_arrow_forward" />
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
         </RelativeLayout>
 
         <RelativeLayout

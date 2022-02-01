@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -70,6 +71,8 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends RuntimePer
     Context context;
     protected ProgressDialogAvl progressDialogAvl;
     public boolean check_session = true;
+//    SharedPreferences appDataSharedPreferences;
+//    SharedPreferences.Editor appDataEditor;
     private static final String TAG = BaseActivity.class.getName();
     protected V binding;
     protected Vibrator vibrator;
@@ -94,6 +97,11 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends RuntimePer
         progressDialogAvl.setCancelable(false);
         onViewReady(savedInstanceState, getIntent());
         vibrator = (Vibrator) Objects.requireNonNull(this).getSystemService(Context.VIBRATOR_SERVICE);
+
+
+        //App data store in local storage
+//        appDataSharedPreferences=context.getSharedPreferences(Constants.APP_LOCAL_DATA,MODE_PRIVATE);
+//        appDataEditor=appDataSharedPreferences.edit();
     }
 
     @Override
@@ -114,6 +122,43 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends RuntimePer
             Timber.d("df");
         }
     }
+
+
+
+    ///Get the data from local database sharedpreferences
+    /*
+    *  protected String getStringFromLocalData(String keyName){
+        String value=appDataSharedPreferences.getString(keyName,"");
+        return value;
+    }
+
+    protected boolean getBooleanFromLocalData(String keyName){
+        boolean value=appDataSharedPreferences.getBoolean(keyName,false);
+        return value;
+    }
+
+    protected int getIntegerFromLocalData(String keyName){
+        int value=appDataSharedPreferences.getInt(keyName,0);
+
+        return value;
+    }
+
+    protected void setStringInLocalData(String keyName, String keyValue){
+        appDataEditor.putString(keyName,keyValue);
+        appDataEditor.apply();
+    }
+    protected void setBooleanInLocalData(String keyName, boolean keyValue){
+        appDataEditor.putBoolean(keyName,keyValue);
+        appDataEditor.apply();
+    }
+    protected void setIntegerInLocalData(String keyName, int keyValue){
+        appDataEditor.putInt(keyName,keyValue);
+        appDataEditor.apply();
+    }
+
+    *
+    * */
+
 
 
     @Subscribe(threadMode = ThreadMode.MAIN)

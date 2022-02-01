@@ -30,6 +30,7 @@ import com.flytrom.learning.activities.auth.ChangePasswordActivity;
 import com.flytrom.learning.activities.auth.ValidatePhoneActivity;
 import com.flytrom.learning.activities.changeNumEmail.ChangePhoneOrrEmailActivity;
 import com.flytrom.learning.activities.others.EditProfileActivity;
+import com.flytrom.learning.activities.others.HomeActivity;
 import com.flytrom.learning.activities.payment.SubscribeActivity;
 import com.flytrom.learning.adapters.MyPurchasedPlansAdapter;
 import com.flytrom.learning.base.BaseCallback;
@@ -39,6 +40,7 @@ import com.flytrom.learning.beans.response_beans.auth.PurchasedPlansBean;
 import com.flytrom.learning.databinding.BottomSheetViewReceiptBinding;
 import com.flytrom.learning.databinding.FragmentMyPurchasedPlanBinding;
 import com.flytrom.learning.interfaces.IOnBackpresed;
+import com.flytrom.learning.pdf_viewer.PdfDownloadFileTask;
 import com.flytrom.learning.utils.PrefUtils;
 import com.flytrom.learning.utils.UtilMethods;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
@@ -105,8 +107,6 @@ public class MyPurchasedPlanFragment extends BaseFragment<FragmentMyPurchasedPla
         } else {
             binding.linearEmptyView.setVisibility(View.VISIBLE);
         }
-
-
     }
 
 
@@ -180,7 +180,13 @@ public class MyPurchasedPlanFragment extends BaseFragment<FragmentMyPurchasedPla
                 binding.elPdf.setVisibility(View.GONE);
                 break;
           case R.id.downloadPdf:
-              new DownloadFileTask(getActivity()).execute("https://learningapp.flytrom.com/media/"+pdfUrl);
+              new PdfDownloadFileTask(getActivity()).execute("https://learningapp.flytrom.com/media/"+pdfUrl);
+              break;
+
+            case R.id.relative_explore_plans:
+                startActivity(new Intent(getActivity(), SubscribeActivity.class));
+                goNextAnimation();
+                break;
         }
     };
 
