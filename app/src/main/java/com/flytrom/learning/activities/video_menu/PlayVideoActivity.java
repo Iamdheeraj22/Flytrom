@@ -264,6 +264,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
         linear_download = findViewById(R.id.linear_download);
         addListener();
 
+
         elEditComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -291,7 +292,6 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
         initView(savedInstanceState);
         configVimeoClient();
         MySharedPreferences.getInstance().saveString(this, ConstantsNew.BACK, "0");
-
         startTimerVisible();
        // checkVideoIsDownloading();
 
@@ -482,10 +482,10 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
             }
         });
 
-
         binding.videoView2.setControllerVisibilityListener(visibility -> {
         });
         setAdapter(new ArrayList<>());
+        keyboard();
     }
 
     private void configVimeoClient() {
@@ -506,21 +506,17 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
         player.setPlayWhenReady(playWhenReady);
         player.seekTo(currentWindow, playbackPosition);
         player.prepare();
-
-
         trackSelector = new DefaultTrackSelector(/* context= */ this);
 
     }
 
     private void callVimeoAPIRequest(String videoLink) {
         String url = videoLink;
-        Log.d("JHGHGGHK", url);
         String strNew = url.replaceFirst("https://vimeo.com/", "");
         String stringId = strNew.replaceFirst("manage/videos/", "");
         String id = stringId;
         arrayList = new ArrayList<>();
 //        id = stringId
-        Log.d("JHGHGGHK2", id);
         VIMDEO_ID = id;
         VimeoInterface vimeoInterface = VimeoClientAPI.getClient().create(VimeoInterface.class);
         vimeoInterface.getVimeoUrlResponse(VIMDEO_ID).enqueue(new Callback<VimeoResponse>() {
@@ -533,22 +529,19 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                         String mainQuality = qualityData.replaceFirst("p", "");
                         int quality = Integer.parseInt(mainQuality);
                         arrayList.add(quality);
-                        Log.d("BNVHKGV", mainQuality);
+
                     }
 
                     setting.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Log.d("BNVHKGV3", String.valueOf(arrayList.size()));
                             Collections.sort(arrayList, Collections.reverseOrder());
-
 
                             PopupMenu popup = new PopupMenu(PlayVideoActivity.this, setting);
                             for (int j = 0; j < response.body().getRequest().getFiles().getProgressive().size(); j++) {
 
                                 popup.getMenu().add(0, 0, 0, arrayList.get(j).toString() + "p");
                             }
-
                             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                                 public boolean onMenuItemClick(MenuItem item) {
                                     qualityString = String.valueOf(item.getTitle());
@@ -586,9 +579,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                                 second = Integer.parseInt(h1[1]);
                             }
 
-
                             total_duration_in_seconds = second + (60 * minute) + (3600 * hour);
-
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -626,21 +617,16 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                                     second = Integer.parseInt(h1[1]);
                                 }
 
-
                                 total_duration_in_seconds = second + (60 * minute) + (3600 * hour);
-
 
                                 pvDownloadLink = response.body().getRequest().getFiles().getProgressive().get(i).getUrl();
                             }
                         }
-
                     }
                     Log.d(TAG, response.body().getRequest().getFiles().getProgressive().get(0).getUrl());
-
                     int seconds = Integer.parseInt(String.valueOf(mVideoBean.getSeconds()));
 //                    mVdoPlayer.seekTo(seconds * 1000);
                     player.seekTo(seconds * 1000);
-
                 } else {
                     Log.d("DSJDSBJ", response.message());
                 }
@@ -675,7 +661,6 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
     }
 
     private void addListener() {
-
         binding.toolbar.imageBack.setOnClickListener(v -> onBackPressed());
 
         player.addListener(new Player.EventListener() {
@@ -1064,13 +1049,6 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
         binding.recyclerVideoTopics.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerVideoTopics.setAdapter(mVideoTopicsAdapter);
 
-
-
-
-
-
-
-
         setBaseCallback(baseCallback);
         getData();
 
@@ -1099,8 +1077,12 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
         //getPosterImage();
 
         getPdf();
+    }
 
 
+    //Keyboard listeners
+
+    private void keyboard(){
         KeyboardVisibilityEvent.setEventListener(this, new KeyboardVisibilityEventListener() {
 
             @Override
@@ -1128,7 +1110,6 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
 
             }
         });
-
     }
 
     private void setData() {
@@ -1207,7 +1188,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                     linear_download.setVisibility(View.GONE);
                     binding.linearDownload.setVisibility(View.GONE);
                     binding.relativeProgress.setVisibility(View.VISIBLE);
-
+                    setTheProgressBarValue();
                 }else {
                     linear_download.setVisibility(View.VISIBLE);
                     binding.relativeProgress.setVisibility(View.GONE);
@@ -1218,13 +1199,36 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
             }
 
             callVimeoAPIRequest(mVideoBean.getVideoLink());
-            getCommentApi(String.valueOf(videoId));
+
             if (mVideoBean != null) {
                 pdfUrl = mVideoBean.getNotes();
                 binding.toolbar.textTitle.setText(mVideoBean.getCategory());
                 binding.toolbar.textTitle.setTextColor(Color.parseColor("#484848"));
             }
         }
+    }
+
+
+    //Set up the progress bar value of the download video
+    private void setTheProgressBarValue() {
+       String downloadedPercent= appDataSharedPreferences.getString("video"+mVideoBean.getId()+"p",null);
+       if(downloadedPercent!=null){
+           if(!(downloadedPercent.equals("100"))) {
+               Handler handler = new Handler();
+               handler.postDelayed(() -> {
+                   text_percent.setText(downloadedPercent + "%");
+                   progress_bar.setProgress(Integer.parseInt(downloadedPercent));
+                   setTheProgressBarValue();
+               }, 500);
+           }
+       }else{
+           downloadVideoStatusUpdate(mVideoBean,"downlaod");
+           linear_download.setVisibility(View.VISIBLE);
+           binding.relativeProgress.setVisibility(View.GONE);
+           binding.imageDownload.setImageResource(R.drawable.tick);
+           binding.textDownload.setText("Downlaoded");
+           getData();
+       }
     }
 
     private void prepareDownloadVideo() {
@@ -1838,7 +1842,6 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                             // The dialog is automatically dismissed when a dialog button is clicked.
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-
                                     downloadVideoStatusUpdate(mVideoBean, "remove");
                                 }
                             })
@@ -1956,6 +1959,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                 binding.rlPDF.setVisibility(View.GONE);
                 break;
             case R.id.linear_chat:
+                getCommentApi(String.valueOf(videoId));
                 try {
                     binding.linearChatLine.setBackgroundColor(Color.parseColor("#3C9FEB"));
                     binding.rlComment.setVisibility(View.VISIBLE);
@@ -2492,8 +2496,6 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
         cmntId = id;
         binding.rlDltCmt.setVisibility(View.VISIBLE);
     }
-
-
     //Edit the sub comment of subject video
     public void showEdt(String id, String comment) {
         cmntId = id;
@@ -2989,6 +2991,7 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                                 Toast.makeText(PlayVideoActivity.this, "Video link not available", Toast.LENGTH_SHORT).show();
                             } else {
                                 appDataEditor.putString("video"+mVideoBean.getId(),"yes");
+                                appDataEditor.putInt("video"+mVideoBean.getId()+"p",0);
                                 appDataEditor.apply();
                                 new DownloadFileTask(mVideoBean,PlayVideoActivity.this, binding.relativeProgress, String.valueOf(mVideoBean.getId()),progress_bar, text_percent, linear_download, text_download, binding.relativeProgress, binding.imageDownload, new OnDownloadListner() {
                                     @Override
@@ -3032,22 +3035,18 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
                 if (successBean != null) {
                     if (successBean.getStatus() == Constants.SUCCESS_CODE) {
                         if (type.equals("downlaod")) {
-                            showBaseProgress();
                             mVideoBean.setIsDownloaded("yes");
                             linear_download.setVisibility(View.VISIBLE);
                             binding.relativeProgress.setVisibility(View.GONE);
                             binding.imageDownload.setImageResource(R.drawable.tick);
                             binding.textDownload.setText("Downlaoded");
-                            hideBaseProgress();
                             getData();
                         }else if(type.equals("remove")) {
-                            showBaseProgress();
                             mVideoBean.setIsDownloaded("no");
                             linear_download.setVisibility(View.VISIBLE);
                             binding.relativeProgress.setVisibility(View.GONE);
                             binding.imageDownload.setImageResource(R.drawable.ic_download);
                             binding.textDownload.setText("Downlaod");
-                            hideBaseProgress();
                             getData();
                         }
                     }
@@ -3181,5 +3180,17 @@ public class PlayVideoActivity extends BaseActivity<ActivityPlayVideoBinding>
             binding.linearEmptyView21.setVisibility(View.VISIBLE);
         }
     }
+}
 
+
+class GetComments implements Runnable{
+    VideoBean videoBean;
+    GetComments(VideoBean videoBean){
+        this.videoBean=videoBean;
+    }
+
+    @Override
+    public void run() {
+
+    }
 }

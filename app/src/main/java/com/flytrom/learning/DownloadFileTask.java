@@ -186,13 +186,16 @@ public class DownloadFileTask extends AsyncTask<String, Integer, String> {
     @Override
     protected void onProgressUpdate(Integer... progress) {
         super.onProgressUpdate(progress);
+        setTheSharedPreferences();
         // if we get here, length is known, now set indeterminate to false
         if (progressBar != null) {
             progressBar.setMax(100);
             progressBar.setProgress(progress[0]);
-            if(!((Activity)context).isFinishing()){
-                text_percent.setText(progress[0]+"%");
+            editor.putString("video"+videoId+"p",String.valueOf(progress[0])).apply();
+            if(!((Activity)context).isFinishing()) {
+                text_percent.setText(progress[0] + "%");
             }
+
             downloadPercentage=progress[0];
             if(progress[0]==100){
                 updateDownloadMark();
@@ -217,6 +220,7 @@ public class DownloadFileTask extends AsyncTask<String, Integer, String> {
                 Toast.makeText(context, "Download error: " + result, Toast.LENGTH_LONG).show();}
             else{
                 editor.remove("video"+videoId).apply();
+                editor.remove("video"+videoId+"p").apply();
                 Toast.makeText(context, "File downloaded", Toast.LENGTH_SHORT).show();
                 linear_download.setVisibility(View.VISIBLE);
                 progressLayout.setVisibility(View.GONE);

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: C./Users/hp/StudioProjects/Flytrom/app/libs/google-pay-client-api-1.0.0.aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/744231ad771565eff941d36bde97ab8e/jetified-google-pay-client-api-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/744231ad771565eff941d36bde97ab8e/jetified-google-pay-client-api-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/744231ad771565eff941d36bde97ab8e/jetified-google-pay-client-api-1.0.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
